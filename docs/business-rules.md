@@ -13,12 +13,12 @@
 - RG8 : Un acteur doit avoir un ou plusieurs rôles
 - RG9 : Un acteur doit avoir une date de naissance
 
-## Les rôles
-- RG10 : Un rôle doit avoir un nom
-- RG11 : Un rôle peut être principal ou secondaire
-- RG12 : Un rôle peut avoir un ou plusieurs acteurs
-- RG13 : Un rôle peut appartenir à un ou plusieurs films
-- RG14 : Un rôle peut être le rôle préféré d'un ou plusieurs utilisateurs
+## Les personnages
+- RG10 : Un personnage doit avoir un nom
+- RG11 : Un personnage peut être principal ou secondaire
+- RG12 : Un personnage peut avoir un ou plusieurs acteurs
+- RG13 : Un personnage peut appartenir à un ou plusieurs films
+- RG14 : Un personnage peut être le personnage préféré d'un ou plusieurs utilisateurs
 
 
 ## Les réalisateurs
@@ -31,6 +31,6 @@
 - RG19 : Un utilisateur doit avoir un Prénom
 - RG20 : Un utilisateur doit avoir un email
 - RG21 : Un utilisateur doit avoir un mot de passe
-- RG22 : Un utilisateur peut avoir un ou plusieurs rôles préférés (non obligatoire)
+- RG22 : Un utilisateur peut avoir un ou plusieurs personnages préférés (non obligatoire)
 - RG23 : Un utilisateur peut avoir un ou plusieurs films préférés (non obligatoire)
 ​
