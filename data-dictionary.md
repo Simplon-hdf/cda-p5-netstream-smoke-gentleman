@@ -9,3 +9,12 @@
 | length       | entier         | Durée du film en minute                   | 125                                  |
 | release_date | date           | Date de sortie du film                    | 20-10-2002                           |
 | director_id  | Alphanumérique | Identifiant unique du réalisateur associé | 4f9a2b18-7c7b-4c8a-bc90-9e0b1e2d4a5f |
+
+## Acteurs
+
+| Attribut         | Type           | Description                    | Exemple                              |
+| ---------------- | -------------- | ------------------------------ | ------------------------------------ |
+| actor_id         | Alphanumérique | Identifiant unique de l'acteur | 4f9a2b18-7c7b-4c8a-bc90-9e0b1e2d4a5f |
+| first_name_actor | Alphanumérique | prénom de l'acteur             | Tom                                  |
+| last_name_actor  | Alphanumérique | nom de l'acteur                | Holland                              |
+| date_of_birth    | date           | date de naissance              | 01-06-1996                           |
