@@ -18,3 +18,11 @@
 | first_name_actor | Alphanumérique | prénom de l'acteur             | Tom                                  |
 | last_name_actor  | Alphanumérique | nom de l'acteur                | Holland                              |
 | date_of_birth    | date           | date de naissance              | 01-06-1996                           |
+
+# Rôles
+
+| Attribut         | Type           | Description                | Exemple                              |
+| ---------------- | -------------- | -------------------------- | ------------------------------------ |
+| character_id     | Alphanumérique | Identifiant unique du rôle | 4f9a2b18-7c7b-4c8a-bc90-9e0b1e2d4a5f |
+| character_name   | Alphanumérique | nom du rôle                | Spider-man                           |
+| character_status | Alphanumérique | type de rôle               | Principal                            |
