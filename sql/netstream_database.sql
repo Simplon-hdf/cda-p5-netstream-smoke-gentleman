@@ -110,4 +110,4 @@ CREATE TABLE IF NOT EXISTS archives(
     old_value VARCHAR(50) NOT NULL,
     new_value VARCHAR(50) NOT NULL,
     spectator_id uuid NOT NULL
-)
+);
