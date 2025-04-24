@@ -6,6 +6,24 @@ CREATE USER netstream
 CREATE DATABASE netstream
   WITH OWNER = netstream;
 
+ -- Création d'un nouvel utilisateur administrateur
+CREATE USER netstream_admin
+  WITH PASSWORD 'admin_secret';
+
+-- Attribution des privilèges sur la base de données
+GRANT ALL PRIVILEGES ON DATABASE netstream TO netstream_admin;
+
+-- Se connecter à la base de données pour donner des droits sur le schéma et les objets
+\connect netstream
+
+-- Donner tous les droits sur le schéma
+GRANT ALL PRIVILEGES ON SCHEMA netstream_schema TO netstream_admin;
+
+-- Donner tous les droits sur toutes les tables du schéma
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA netstream_schema TO netstream_admin;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA netstream_schema TO netstream_admin;
+GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA netstream_schema TO netstream_admin;
+
 -- Connection à la base de données
 \connect netstream
 
@@ -110,4 +128,4 @@ CREATE TABLE IF NOT EXISTS archives(
     old_value VARCHAR(50) NOT NULL,
     new_value VARCHAR(50) NOT NULL,
     spectator_id uuid NOT NULL
-)
+);
