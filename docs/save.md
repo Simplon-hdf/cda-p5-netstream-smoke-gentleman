@@ -18,4 +18,26 @@ La base de donnée sera sauvegarder tous les jours à 2 heures du matin, un fich
 La sauvegarde se fera grace à un script qui sera executé tous les jour à 2h00
 
 ```
+#!/bin/bash
+
+# Configuration
+BACKUP_DIR="/home/exiz/Desktop/stupid-test"
+DB_NAME="netstream"
+DB_USER="netstream_admin"
+LOG_FILE="$BACKUP_DIR/backup.log"
+DATE=$(date +%F_%H-%M-%S)
+FILE="${DB_NAME}_$DATE.backup"
+
+# Sauvegarde
+echo "[$(date)] DÉBUT sauvegarde" >> "$LOG_FILE"
+ if pg_dump -U "$DB_USER" -d "$DB_NAME" -F c -f "$BACKUP_DIR/Netstream-$DATE.backup" >> "$LOG_FILE" 2>&1; then
+     echo "[$(date)] ✅ Sauvegarde réussie : $FILE" >> "$LOG_FILE"
+ else
+     echo "[$(date)] ❌ ÉCHEC sauvegarde" >> "$LOG_FILE"
+fi
+
+# Suppression des fichiers de plus de 7 jours
+
+find "$BACKUP_DIR" -name "*.backup" -mtime +7 -exec rm {} \; >> "$LOG_FILE"
+```
 
