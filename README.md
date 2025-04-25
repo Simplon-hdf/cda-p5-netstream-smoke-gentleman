@@ -1,1 +1,79 @@
 # cda-p5-netstream-smoke-gentleman
+
+## Requêtes SQL
+
+Les titres et dates de sortie des films du plus récent au plus ancien
+
+```
+SELECT title, release_date from movies 
+ORDER BY release_date DESC;
+
+```
+
+Les noms, prénoms et âges des acteurs/actrices de plus de 30 ans dans l'ordre alphabétique
+
+```
+SELECT first_name_actor, last_name_actor, EXTRACT(YEAR FROM AGE(CURRENT_DATE, date_of_birth)) AS age from actors
+ WHERE EXTRACT(YEAR FROM AGE(CURRENT_DATE, date_of_birth)) > 30;
+
+```
+
+La liste des acteurs/actrices principaux pour un film donné
+
+```
+SELECT first_name_actor, last_name_actor from actors
+    INNER JOIN character_actors ON character_actors.actor_id = actors.id
+        INNER JOIN characters ON characters.id = character_actors.character_id
+            INNER JOIN movies_characters ON movies_characters.character_id = characters.id
+                INNER JOIN movies ON movies.id = movies_characters.movie_id
+WHERE title = 'Dune' and character_type = 'principal';
+```
+
+La liste des films pour un acteur/actrice donné
+
+```
+SELECT title from movies
+    INNER JOIN movies_characters ON movies_characters.movie_id = movies.id
+        INNER JOIN characters ON characters.id = movies_characters.character_id
+            INNER JOIN character_actors ON character_actors.character_id = characters.id
+                INNER JOIN actors ON actors.id = character_actors.actor_id
+                    WHERE first_name_actor = 'Robert' and last_name_actor = 'De Niro';
+
+```
+
+Ajouter un film
+
+```
+INSERT INTO movies (title, length, release_date, director_id) VALUES
+  ('Inception', 148, '2010-07-16', (SELECT id FROM directors WHERE last_name_director = 'Nolan')),
+```
+Ajouter un acteur/actrice
+
+```
+INSERT INTO actors (first_name_actor, last_name_actor, date_of_birth) VALUES
+  ('Leonardo', 'DiCaprio', '1974-11-11'),
+```
+
+Modifier un film
+
+```
+UPDATE movies
+ SET 
+   length = 170,
+ WHERE title = 'Inception';
+```
+Supprimer un acteur/actrice
+
+```
+DELETE FROM actors
+WHERE first_name_actor = 'Leonardo'
+  AND last_name_actor = 'DiCaprio'
+  AND date_of_birth = '1974-11-11';
+```
+Afficher les 3 derniers acteurs/actrices ajouté(e)s
+
+```
+SELECT * from actors 
+ ORDER BY created_at DESC
+ LIMIT 3;
+```
