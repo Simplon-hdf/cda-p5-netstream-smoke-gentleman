@@ -5,7 +5,7 @@
 Les titres et dates de sortie des films du plus récent au plus ancien
 
 ```
-SELECT title, release_date from movies 
+SELECT title, release_date from movies
 ORDER BY release_date DESC;
 
 ```
@@ -58,7 +58,7 @@ Modifier un film
 
 ```
 UPDATE movies
- SET 
+ SET
    length = 170,
  WHERE title = 'Inception';
 ```
@@ -73,14 +73,14 @@ WHERE first_name_actor = 'Leonardo'
 Afficher les 3 derniers acteurs/actrices ajouté(e)s
 
 ```
-SELECT * from actors 
+SELECT * from actors
  ORDER BY created_at DESC
  LIMIT 3;
 ```
 
-## Requêtes avancées 
+## Requêtes avancées
 
-Fonction pour lister les films selon les réalisateurs : 
+Fonction pour lister les films selon les réalisateurs :
 
 ```sql
 CREATE OR REPLACE FUNCTION listFilmsRealisateur(
@@ -100,7 +100,7 @@ BEGIN
 END;
 $$;
 ```
-Opérations CRUD pour ajouter un acteur au sein d'un film avec des procédures stockées : 
+Opérations CRUD pour ajouter un acteur au sein d'un film avec des procédures stockées :
 
 ```sql
 -- Procédure pour ajouter un nouvel acteur à un film
@@ -227,4 +227,33 @@ BEGIN
 END;
 $$;
 
+-- Cette fonction permet de conserver un historique des modifications apportées aux utilisateurs
+
+CREATE OR REPLACE FUNCTION log_spectator_updates()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO archives (id, archive_date, modified_field, old_value, new_value, spectator_id)
+    SELECT
+        gen_random_uuid(),
+        NOW(),
+        col.column_name,
+        (OLD.*)::jsonb ->> col.column_name,
+        (NEW.*)::jsonb ->> col.column_name,
+        NEW.id
+    FROM information_schema.columns col
+    WHERE col.table_name = 'spectators'
+      AND (OLD.*)::jsonb ->> col.column_name IS DISTINCT FROM (NEW.*)::jsonb ->> col.column_name;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Création du trigger qui s'active après chaque modification d'un spectateur
+
+CREATE TRIGGER track_spectator_updates
+AFTER UPDATE ON spectators
+FOR EACH ROW
+EXECUTE FUNCTION log_spectator_updates();
+
 ```
+
