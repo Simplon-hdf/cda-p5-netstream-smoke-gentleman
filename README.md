@@ -42,3 +42,24 @@ INSERT INTO movies (title, length, release_date, director_id) VALUES
 INSERT INTO actors (first_name_actor, last_name_actor, date_of_birth) VALUES
   ('Leonardo', 'DiCaprio', '1974-11-11'),
 ```
+
+```
+UPDATE movies
+ SET 
+   length = 170,
+ WHERE title = 'Inception';
+```
+
+```
+DELETE FROM actors
+WHERE first_name_actor = 'Leonardo'
+  AND last_name_actor = 'DiCaprio'
+  AND date_of_birth = '1974-11-11';
+```
+
+
+```
+SELECT * from actors 
+ ORDER BY created_at DESC
+ LIMIT 3;
+```
