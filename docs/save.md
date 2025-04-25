@@ -21,7 +21,7 @@ La sauvegarde se fera grace à un script qui sera executé tous les jour à 2h00
 #!/bin/bash
 
 # Configuration
-BACKUP_DIR="/home/exiz/Desktop/stupid-test"
+BACKUP_DIR= "path"
 DB_NAME="netstream"
 DB_USER="netstream_admin"
 LOG_FILE="$BACKUP_DIR/backup.log"
@@ -40,4 +40,23 @@ fi
 
 find "$BACKUP_DIR" -name "*.backup" -mtime +7 -exec rm {} \; >> "$LOG_FILE"
 ```
+il faudra modifier les permissions du fichier pour qu'il soit executable
+
+le mot de passe de l'utilsateur sera conserver dans le fichier .pgpass
+
+>nano .pgpass
+
+Mettre la ligne en remplaçant les informations
+
+>hostname:port:database:username:password
+
+le script sera executer avec la planification de cron avec la ligne
+
+> 0 2 * * * path/script.sh
+
+
+
+En cas de problème on peut restoré une ancienne sauvegarde avec
+
+> pg_restore -U User -d netstream path_to_backup
 
