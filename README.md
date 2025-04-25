@@ -76,6 +76,7 @@ Afficher les 3 derniers acteurs/actrices ajouté(e)s
 SELECT * from actors 
  ORDER BY created_at DESC
  LIMIT 3;
+```
 
 ## Requêtes avancées 
 
