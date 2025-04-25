@@ -1,40 +1,20 @@
--- Création d'un utilisateur
-CREATE USER netstream
-  WITH PASSWORD 'secret';
+-- Connexion à PostgreSQL
+psql -U postgres
 
--- Création de la base de données avec cet utilisateur comme propriétaire
-CREATE DATABASE netstream
-  WITH OWNER = netstream;
+-- Création de la base de données
+CREATE DATABASE netstream;
 
- -- Création d'un nouvel utilisateur administrateur
-CREATE USER netstream_admin
-  WITH PASSWORD 'admin_secret';
 
--- Attribution des privilèges sur la base de données
+-- Création de l'administrateur de la base de données
+CREATE ROLE netstream_admin WITH LOGIN PASSWORD 'secret';
+
+-- Attribution des droits d'accès à l'administrateur
 GRANT ALL PRIVILEGES ON DATABASE netstream TO netstream_admin;
 
--- Se connecter à la base de données pour donner des droits sur le schéma et les objets
-\connect netstream
+-- Connexion à la base de données
+\c netstream
 
--- Donner tous les droits sur le schéma
-GRANT ALL PRIVILEGES ON SCHEMA netstream_schema TO netstream_admin;
-
--- Donner tous les droits sur toutes les tables du schéma
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA netstream_schema TO netstream_admin;
-GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA netstream_schema TO netstream_admin;
-GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA netstream_schema TO netstream_admin;
-
--- Connection à la base de données
-\connect netstream
-
--- Création d'un schéma
-CREATE SCHEMA netstream_schema
-  AUTHORIZATION netstream;
-
--- Définir le schéma par défaut
-SET search_path TO netstream_schema;
-
--- Table des réalisateurs
+-- Création de la table des réalisateurs
 CREATE TABLE IF NOT EXISTS directors(
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     first_name_director VARCHAR(120) NOT NULL,
@@ -43,7 +23,7 @@ CREATE TABLE IF NOT EXISTS directors(
     updated_at TIMESTAMP
 );
 
--- Table des films
+-- Création de la table des films
 CREATE TABLE IF NOT EXISTS movies(
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     title VARCHAR(200) NOT NULL,
@@ -55,7 +35,7 @@ CREATE TABLE IF NOT EXISTS movies(
     FOREIGN KEY (director_id) REFERENCES directors(id)
 );
 
--- Table des personnages
+-- Création de la table des personnages
 CREATE TABLE IF NOT EXISTS characters(
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     name_character VARCHAR(120) NOT NULL,
@@ -63,7 +43,7 @@ CREATE TABLE IF NOT EXISTS characters(
     updated_at TIMESTAMP
 );
 
--- Table des acteurs
+-- Création de la table des acteurs
 CREATE TABLE IF NOT EXISTS actors(
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     first_name_actor VARCHAR(120) NOT NULL,
@@ -73,7 +53,7 @@ CREATE TABLE IF NOT EXISTS actors(
     updated_at TIMESTAMP
 );
 
--- Table des spectateurs
+-- Création de la table des spectateurs
 CREATE TABLE IF NOT EXISTS spectators(
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     first_name_spectator VARCHAR(120) NOT NULL,
@@ -84,7 +64,7 @@ CREATE TABLE IF NOT EXISTS spectators(
     updated_at TIMESTAMP
 );
 
--- Table d'association entre films et personnages
+-- Création de la table d'association entre films et personnages
 CREATE TABLE IF NOT EXISTS movies_characters(
     movie_id uuid NOT NULL,
     character_id uuid NOT NULL,
@@ -94,7 +74,7 @@ CREATE TABLE IF NOT EXISTS movies_characters(
     FOREIGN KEY (character_id) REFERENCES characters(id) ON DELETE CASCADE
 );
 
--- Table d'association entre acteurs et personnages
+-- Création de la table d'association entre acteurs et personnages
 CREATE TABLE IF NOT EXISTS character_actors(
     actor_id uuid NOT NULL,
     character_id uuid NOT NULL,
@@ -103,7 +83,7 @@ CREATE TABLE IF NOT EXISTS character_actors(
     FOREIGN KEY (character_id) REFERENCES characters(id) ON DELETE CASCADE
 );
 
--- Table d'association entre spectateurs et films favoris
+-- Création de la table d'association entre spectateurs et films favoris
 CREATE TABLE IF NOT EXISTS movies_spectators(
     spectator_id uuid NOT NULL,
     movie_id uuid NOT NULL,
@@ -112,7 +92,7 @@ CREATE TABLE IF NOT EXISTS movies_spectators(
     FOREIGN KEY (movie_id) REFERENCES movies(id) ON DELETE CASCADE
 );
 
--- Table d'association entre spectateurs et personnages favoris
+-- Création de la table d'association entre spectateurs et personnages favoris
 CREATE TABLE IF NOT EXISTS spectators_characters(
     spectator_id uuid NOT NULL,
     character_id uuid NOT NULL,
@@ -121,8 +101,9 @@ CREATE TABLE IF NOT EXISTS spectators_characters(
     FOREIGN KEY (character_id) REFERENCES characters(id) ON DELETE CASCADE
 );
 
+-- Création de la table des archives
 CREATE TABLE IF NOT EXISTS archives(
-    id uuid PRIMARY KEY DEFAULT,
+    id uuid PRIMARY KEY not null,
     archive_date TIMESTAMP DEFAULT NOW(),
     modified_field VARCHAR(50) NOT NULL,
     old_value VARCHAR(50) NOT NULL,
