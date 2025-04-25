@@ -1,6 +1,8 @@
--- Insertion des réalisateurs
+-- ===============================================
+-- INSERTION DES RÉALISATEURS
+-- ===============================================
 INSERT INTO directors (id, first_name_director, last_name_director) VALUES
-(gen_random_uuid(), 'Christopher', 'Nolan'),
+  (gen_random_uuid(), 'Christopher', 'Nolan'),
   (gen_random_uuid(), 'Quentin', 'Tarantino'),
   (gen_random_uuid(), 'Sofia', 'Coppola'),
   (gen_random_uuid(), 'Steven', 'Spielberg'),
@@ -8,22 +10,40 @@ INSERT INTO directors (id, first_name_director, last_name_director) VALUES
   (gen_random_uuid(), 'Greta', 'Gerwig'),
   (gen_random_uuid(), 'Denis', 'Villeneuve'),
   (gen_random_uuid(), 'Martin', 'Scorsese'),
-  (gen_random_uuid(), 'Patty', 'Jenkins');
+  (gen_random_uuid(), 'Patty', 'Jenkins'),
+  (gen_random_uuid(), 'Francis Ford', 'Coppola'),
+  (gen_random_uuid(), 'Ridley', 'Scott'),
+  (gen_random_uuid(), 'Alfred', 'Hitchcock');
 
--- Insertion des films
+-- ===============================================
+-- INSERTION DES FILMS
+-- ===============================================
 INSERT INTO movies (id, title, length, release_date, director_id) VALUES
   (gen_random_uuid(), 'Inception', 148, '2010-07-16', (SELECT id FROM directors WHERE last_name_director = 'Nolan')),
   (gen_random_uuid(), 'Pulp Fiction', 154, '1994-10-14', (SELECT id FROM directors WHERE last_name_director = 'Tarantino')),
-  (gen_random_uuid(), 'Lost in Translation', 102, '2003-10-03', (SELECT id FROM directors WHERE last_name_director = 'Coppola')),
+  (gen_random_uuid(), 'Lost in Translation', 102, '2003-10-03', (SELECT id FROM directors WHERE last_name_director = 'Coppola' AND first_name_director = 'Sofia')),
   (gen_random_uuid(), 'Jurassic Park', 127, '1993-06-11', (SELECT id FROM directors WHERE last_name_director = 'Spielberg')),
   (gen_random_uuid(), 'Avatar', 162, '2009-12-18', (SELECT id FROM directors WHERE last_name_director = 'Cameron')),
   (gen_random_uuid(), 'Lady Bird', 94, '2017-09-01', (SELECT id FROM directors WHERE last_name_director = 'Gerwig')),
   (gen_random_uuid(), 'Dune', 155, '2021-10-22', (SELECT id FROM directors WHERE last_name_director = 'Villeneuve')),
   (gen_random_uuid(), 'The Irishman', 209, '2019-09-27', (SELECT id FROM directors WHERE last_name_director = 'Scorsese')),
-  (gen_random_uuid(), 'Wonder Woman', 141, '2017-06-02', (SELECT id FROM directors WHERE last_name_director = 'Jenkins'));
+  (gen_random_uuid(), 'Wonder Woman', 141, '2017-06-02', (SELECT id FROM directors WHERE last_name_director = 'Jenkins')),
+  (gen_random_uuid(), 'The Dark Knight', 152, '2008-07-18', (SELECT id FROM directors WHERE last_name_director = 'Nolan')),
+  (gen_random_uuid(), 'Interstellar', 169, '2014-11-07', (SELECT id FROM directors WHERE last_name_director = 'Nolan')),
+  (gen_random_uuid(), 'Kill Bill: Vol. 1', 111, '2003-10-10', (SELECT id FROM directors WHERE last_name_director = 'Tarantino')),
+  (gen_random_uuid(), 'The Godfather', 175, '1972-03-24', (SELECT id FROM directors WHERE last_name_director = 'Coppola' AND first_name_director = 'Francis Ford')),
+  (gen_random_uuid(), 'E.T. the Extra-Terrestrial', 115, '1982-06-11', (SELECT id FROM directors WHERE last_name_director = 'Spielberg')),
+  (gen_random_uuid(), 'Titanic', 195, '1997-12-19', (SELECT id FROM directors WHERE last_name_director = 'Cameron')),
+  (gen_random_uuid(), 'Sicario', 121, '2015-09-18', (SELECT id FROM directors WHERE last_name_director = 'Villeneuve')),
+  (gen_random_uuid(), 'Arrival', 116, '2016-11-11', (SELECT id FROM directors WHERE last_name_director = 'Villeneuve')),
+  (gen_random_uuid(), 'Goodfellas', 146, '1990-09-19', (SELECT id FROM directors WHERE last_name_director = 'Scorsese')),
+  (gen_random_uuid(), 'Gladiator', 155, '2000-05-05', (SELECT id FROM directors WHERE last_name_director = 'Scott')),
+  (gen_random_uuid(), 'Alien', 117, '1979-05-25', (SELECT id FROM directors WHERE last_name_director = 'Scott')),
+  (gen_random_uuid(), 'Psycho', 109, '1960-06-22', (SELECT id FROM directors WHERE last_name_director = 'Hitchcock'));
 
-
--- Insertion des personnages
+-- ===============================================
+-- INSERTION DES PERSONNAGES
+-- ===============================================
 INSERT INTO characters (id, name_character) VALUES
   (gen_random_uuid(), 'Dom Cobb'),
   (gen_random_uuid(), 'Vincent Vega'),
@@ -37,9 +57,27 @@ INSERT INTO characters (id, name_character) VALUES
   (gen_random_uuid(), 'Frank Sheeran'),
   (gen_random_uuid(), 'Diana Prince'),
   (gen_random_uuid(), 'Chani Kynes'),
-  (gen_random_uuid(), 'Jimmy Hoffa');
+  (gen_random_uuid(), 'Jimmy Hoffa'),
+  (gen_random_uuid(), 'Bruce Wayne'),
+  (gen_random_uuid(), 'The Joker'),
+  (gen_random_uuid(), 'Joseph Cooper'),
+  (gen_random_uuid(), 'Beatrix Kiddo'),
+  (gen_random_uuid(), 'Vito Corleone'),
+  (gen_random_uuid(), 'Michael Corleone'),
+  (gen_random_uuid(), 'Elliott'),
+  (gen_random_uuid(), 'Jack Dawson'),
+  (gen_random_uuid(), 'Rose DeWitt Bukater'),
+  (gen_random_uuid(), 'Kate Macer'),
+  (gen_random_uuid(), 'Louise Banks'),
+  (gen_random_uuid(), 'Henry Hill'),
+  (gen_random_uuid(), 'Maximus Decimus Meridius'),
+  (gen_random_uuid(), 'Ellen Ripley'),
+  (gen_random_uuid(), 'Norman Bates'),
+  (gen_random_uuid(), 'Marion Crane');
 
--- Insertion des acteurs
+-- ===============================================
+-- INSERTION DES ACTEURS
+-- ===============================================
 INSERT INTO actors (id, first_name_actor, last_name_actor, date_of_birth) VALUES
   (gen_random_uuid(), 'Leonardo', 'DiCaprio', '1974-11-11'),
   (gen_random_uuid(), 'John', 'Travolta', '1954-02-18'),
@@ -53,9 +91,25 @@ INSERT INTO actors (id, first_name_actor, last_name_actor, date_of_birth) VALUES
   (gen_random_uuid(), 'Robert', 'De Niro', '1943-08-17'),
   (gen_random_uuid(), 'Gal', 'Gadot', '1985-04-30'),
   (gen_random_uuid(), 'Zendaya', 'Coleman', '1996-09-01'),
-  (gen_random_uuid(), 'Al', 'Pacino', '1940-04-25');
+  (gen_random_uuid(), 'Al', 'Pacino', '1940-04-25'),
+  (gen_random_uuid(), 'Christian', 'Bale', '1974-01-30'),
+  (gen_random_uuid(), 'Heath', 'Ledger', '1979-04-04'),
+  (gen_random_uuid(), 'Matthew', 'McConaughey', '1969-11-04'),
+  (gen_random_uuid(), 'Uma', 'Thurman', '1970-04-29'),
+  (gen_random_uuid(), 'Marlon', 'Brando', '1924-04-03'),
+  (gen_random_uuid(), 'Henry', 'Thomas', '1971-09-09'),
+  (gen_random_uuid(), 'Kate', 'Winslet', '1975-10-05'),
+  (gen_random_uuid(), 'Emily', 'Blunt', '1983-02-23'),
+  (gen_random_uuid(), 'Amy', 'Adams', '1974-08-20'),
+  (gen_random_uuid(), 'Ray', 'Liotta', '1954-12-18'),
+  (gen_random_uuid(), 'Russell', 'Crowe', '1964-04-07'),
+  (gen_random_uuid(), 'Sigourney', 'Weaver', '1949-10-08'),
+  (gen_random_uuid(), 'Anthony', 'Perkins', '1932-04-04'),
+  (gen_random_uuid(), 'Janet', 'Leigh', '1927-07-06');
 
--- Lien entre les personnages et les acteurs
+-- ===============================================
+-- LIEN ENTRE LES PERSONNAGES ET LES ACTEURS
+-- ===============================================
 INSERT INTO character_actors (actor_id, character_id) VALUES
   ((SELECT id FROM actors WHERE last_name_actor = 'DiCaprio'), (SELECT id FROM characters WHERE name_character = 'Dom Cobb')),
   ((SELECT id FROM actors WHERE last_name_actor = 'Travolta'), (SELECT id FROM characters WHERE name_character = 'Vincent Vega')),
@@ -68,35 +122,81 @@ INSERT INTO character_actors (actor_id, character_id) VALUES
   ((SELECT id FROM actors WHERE last_name_actor = 'Chalamet'), (SELECT id FROM characters WHERE name_character = 'Paul Atreides')),
   ((SELECT id FROM actors WHERE last_name_actor = 'De Niro'), (SELECT id FROM characters WHERE name_character = 'Frank Sheeran')),
   ((SELECT id FROM actors WHERE last_name_actor = 'Gadot'), (SELECT id FROM characters WHERE name_character = 'Diana Prince')),
-  ((SELECT id FROM actors WHERE last_name_actor = 'Pacino'), (SELECT id FROM characters WHERE name_character = 'Jimmy Hoffa'));
+  ((SELECT id FROM actors WHERE last_name_actor = 'Coleman'), (SELECT id FROM characters WHERE name_character = 'Chani Kynes')),
+  ((SELECT id FROM actors WHERE last_name_actor = 'Pacino'), (SELECT id FROM characters WHERE name_character = 'Jimmy Hoffa')),
+  ((SELECT id FROM actors WHERE last_name_actor = 'Bale'), (SELECT id FROM characters WHERE name_character = 'Bruce Wayne')),
+  ((SELECT id FROM actors WHERE last_name_actor = 'Ledger'), (SELECT id FROM characters WHERE name_character = 'The Joker')),
+  ((SELECT id FROM actors WHERE last_name_actor = 'McConaughey'), (SELECT id FROM characters WHERE name_character = 'Joseph Cooper')),
+  ((SELECT id FROM actors WHERE last_name_actor = 'Thurman'), (SELECT id FROM characters WHERE name_character = 'Beatrix Kiddo')),
+  ((SELECT id FROM actors WHERE last_name_actor = 'Brando'), (SELECT id FROM characters WHERE name_character = 'Vito Corleone')),
+  ((SELECT id FROM actors WHERE last_name_actor = 'Pacino'), (SELECT id FROM characters WHERE name_character = 'Michael Corleone')),
+  ((SELECT id FROM actors WHERE last_name_actor = 'Thomas'), (SELECT id FROM characters WHERE name_character = 'Elliott')),
+  ((SELECT id FROM actors WHERE last_name_actor = 'DiCaprio'), (SELECT id FROM characters WHERE name_character = 'Jack Dawson')),
+  ((SELECT id FROM actors WHERE last_name_actor = 'Winslet'), (SELECT id FROM characters WHERE name_character = 'Rose DeWitt Bukater')),
+  ((SELECT id FROM actors WHERE last_name_actor = 'Blunt'), (SELECT id FROM characters WHERE name_character = 'Kate Macer')),
+  ((SELECT id FROM actors WHERE last_name_actor = 'Adams'), (SELECT id FROM characters WHERE name_character = 'Louise Banks')),
+  ((SELECT id FROM actors WHERE last_name_actor = 'Liotta'), (SELECT id FROM characters WHERE name_character = 'Henry Hill')),
+  ((SELECT id FROM actors WHERE last_name_actor = 'Crowe'), (SELECT id FROM characters WHERE name_character = 'Maximus Decimus Meridius')),
+  ((SELECT id FROM actors WHERE last_name_actor = 'Weaver'), (SELECT id FROM characters WHERE name_character = 'Ellen Ripley')),
+  ((SELECT id FROM actors WHERE last_name_actor = 'Perkins'), (SELECT id FROM characters WHERE name_character = 'Norman Bates')),
+  ((SELECT id FROM actors WHERE last_name_actor = 'Leigh'), (SELECT id FROM characters WHERE name_character = 'Marion Crane'));
 
-
+-- ===============================================
+-- LIEN ENTRE LES FILMS ET LES PERSONNAGES
+-- ===============================================
 INSERT INTO movies_characters (movie_id, character_id, character_type) VALUES
   ((SELECT id FROM movies WHERE title = 'Dune'), (SELECT id FROM characters WHERE name_character = 'Paul Atreides'), 'principal'),
   ((SELECT id FROM movies WHERE title = 'Dune'), (SELECT id FROM characters WHERE name_character = 'Chani Kynes'), 'secondaire'),
   ((SELECT id FROM movies WHERE title = 'Wonder Woman'), (SELECT id FROM characters WHERE name_character = 'Diana Prince'), 'principal'),
   ((SELECT id FROM movies WHERE title = 'The Irishman'), (SELECT id FROM characters WHERE name_character = 'Frank Sheeran'), 'principal'),
-  ((SELECT id FROM movies WHERE title = 'The Irishman'), (SELECT id FROM characters WHERE name_character = 'Jimmy Hoffa'), 'secondaire');
-
-
-
-
--- Insertion des spectateurs
+  ((SELECT id FROM movies WHERE title = 'The Irishman'), (SELECT id FROM characters WHERE name_character = 'Jimmy Hoffa'), 'secondaire'),
+  ((SELECT id FROM movies WHERE title = 'Inception'), (SELECT id FROM characters WHERE name_character = 'Dom Cobb'), 'principal'),
+  ((SELECT id FROM movies WHERE title = 'Pulp Fiction'), (SELECT id FROM characters WHERE name_character = 'Vincent Vega'), 'principal'),
+  ((SELECT id FROM movies WHERE title = 'Lost in Translation'), (SELECT id FROM characters WHERE name_character = 'Charlotte'), 'principal'),
+  ((SELECT id FROM movies WHERE title = 'Jurassic Park'), (SELECT id FROM characters WHERE name_character = 'Dr. Alan Grant'), 'principal'),
+  ((SELECT id FROM movies WHERE title = 'Jurassic Park'), (SELECT id FROM characters WHERE name_character = 'Ellie Sattler'), 'secondaire'),
+  ((SELECT id FROM movies WHERE title = 'Avatar'), (SELECT id FROM characters WHERE name_character = 'Jake Sully'), 'principal'),
+  ((SELECT id FROM movies WHERE title = 'Avatar'), (SELECT id FROM characters WHERE name_character = 'Neytiri'), 'secondaire'),
+  ((SELECT id FROM movies WHERE title = 'Lady Bird'), (SELECT id FROM characters WHERE name_character = 'Christine McPherson'), 'principal'),
+  ((SELECT id FROM movies WHERE title = 'The Dark Knight'), (SELECT id FROM characters WHERE name_character = 'Bruce Wayne'), 'principal'),
+  ((SELECT id FROM movies WHERE title = 'The Dark Knight'), (SELECT id FROM characters WHERE name_character = 'The Joker'), 'principal'),
+  ((SELECT id FROM movies WHERE title = 'Interstellar'), (SELECT id FROM characters WHERE name_character = 'Joseph Cooper'), 'principal'),
+  ((SELECT id FROM movies WHERE title = 'Kill Bill: Vol. 1'), (SELECT id FROM characters WHERE name_character = 'Beatrix Kiddo'), 'principal'),
+  ((SELECT id FROM movies WHERE title = 'The Godfather'), (SELECT id FROM characters WHERE name_character = 'Vito Corleone'), 'principal'),
+  ((SELECT id FROM movies WHERE title = 'The Godfather'), (SELECT id FROM characters WHERE name_character = 'Michael Corleone'), 'secondaire'),
+  ((SELECT id FROM movies WHERE title = 'E.T. the Extra-Terrestrial'), (SELECT id FROM characters WHERE name_character = 'Elliott'), 'principal'),
+  ((SELECT id FROM movies WHERE title = 'Titanic'), (SELECT id FROM characters WHERE name_character = 'Jack Dawson'), 'principal'),
+  ((SELECT id FROM movies WHERE title = 'Titanic'), (SELECT id FROM characters WHERE name_character = 'Rose DeWitt Bukater'), 'principal'),
+  ((SELECT id FROM movies WHERE title = 'Sicario'), (SELECT id FROM characters WHERE name_character = 'Kate Macer'), 'principal'),
+  ((SELECT id FROM movies WHERE title = 'Arrival'), (SELECT id FROM characters WHERE name_character = 'Louise Banks'), 'principal'),
+  ((SELECT id FROM movies WHERE title = 'Goodfellas'), (SELECT id FROM characters WHERE name_character = 'Henry Hill'), 'principal'),
+  ((SELECT id FROM movies WHERE title = 'Gladiator'), (SELECT id FROM characters WHERE name_character = 'Maximus Decimus Meridius'), 'principal'),
+  ((SELECT id FROM movies WHERE title = 'Alien'), (SELECT id FROM characters WHERE name_character = 'Ellen Ripley'), 'principal'),
+  ((SELECT id FROM movies WHERE title = 'Psycho'), (SELECT id FROM characters WHERE name_character = 'Norman Bates'), 'principal'),
+  ((SELECT id FROM movies WHERE title = 'Psycho'), (SELECT id FROM characters WHERE name_character = 'Marion Crane'), 'secondaire');
+-- ===============================================
+-- INSERTION DES SPECTATEURS
+-- ===============================================
 INSERT INTO spectators (id, first_name_spectator, last_name_spectator, email, password_hash) VALUES
   (gen_random_uuid(), 'Alice', 'Smith', 'alice.smith@example.com', 'hashed_password_1'),
   (gen_random_uuid(), 'Bob', 'Johnson', 'bob.johnson@example.com', 'hashed_password_2'),
   (gen_random_uuid(), 'Eve', 'Williams', 'eve.williams@example.com', 'hashed_password_3'),
-  (gen_random_uuid(), 'Jean', 'Dupont', 'jean.dupont@example.com', 'hashed_password_1'),
-  (gen_random_uuid(), 'Marie', 'Curie', 'marie.curie@example.com', 'hashed_password_2'),
-  (gen_random_uuid(), 'Luc', 'Martin', 'luc.martin@example.com', 'hashed_password_3'),
-  (gen_random_uuid(), 'Sophie', 'Durand', 'sophie.durand@example.com', 'hashed_password_4'),
-  (gen_random_uuid(), 'Paul', 'Morel', 'paul.morel@example.com', 'hashed_password_5'),
-  (gen_random_uuid(), 'Claire', 'Bernard', 'claire.bernard@example.com', 'hashed_password_6');
+  (gen_random_uuid(), 'Jean', 'Dupont', 'jean.dupont@example.com', 'hashed_password_4'),
+  (gen_random_uuid(), 'Marie', 'Curie', 'marie.curie@example.com', 'hashed_password_5'),
+  (gen_random_uuid(), 'Luc', 'Martin', 'luc.martin@example.com', 'hashed_password_6'),
+  (gen_random_uuid(), 'Sophie', 'Durand', 'sophie.durand@example.com', 'hashed_password_7'),
+  (gen_random_uuid(), 'Paul', 'Morel', 'paul.morel@example.com', 'hashed_password_8'),
+  (gen_random_uuid(), 'Claire', 'Bernard', 'claire.bernard@example.com', 'hashed_password_9'),
+  (gen_random_uuid(), 'Thomas', 'Lefebvre', 'thomas.lefebvre@example.com', 'hashed_password_10'),
+  (gen_random_uuid(), 'Julie', 'Dubois', 'julie.dubois@example.com', 'hashed_password_11'),
+  (gen_random_uuid(), 'François', 'Petit', 'francois.petit@example.com', 'hashed_password_12'),
+  (gen_random_uuid(), 'Laura', 'Moreau', 'laura.moreau@example.com', 'hashed_password_13'),
+  (gen_random_uuid(), 'Alexandre', 'Blanc', 'alexandre.blanc@example.com', 'hashed_password_14'),
+  (gen_random_uuid(), 'Émilie', 'Roux', 'emilie.roux@example.com', 'hashed_password_15');
 
-
-
-
--- Lien entre les films et les spectateurs (favoris)
+-- ===============================================
+-- LIEN ENTRE LES FILMS ET LES SPECTATEURS (FAVORIS)
+-- ===============================================
 INSERT INTO movies_spectators (spectator_id, movie_id) VALUES
   ((SELECT id FROM spectators WHERE email = 'alice.smith@example.com'), (SELECT id FROM movies WHERE title = 'Inception')),
   ((SELECT id FROM spectators WHERE email = 'luc.martin@example.com'), (SELECT id FROM movies WHERE title = 'Pulp Fiction')),
@@ -110,33 +210,56 @@ INSERT INTO movies_spectators (spectator_id, movie_id) VALUES
   ((SELECT id FROM spectators WHERE email = 'jean.dupont@example.com'), (SELECT id FROM movies WHERE title = 'Wonder Woman')),
   ((SELECT id FROM spectators WHERE email = 'marie.curie@example.com'), (SELECT id FROM movies WHERE title = 'The Irishman')),
   ((SELECT id FROM spectators WHERE email = 'luc.martin@example.com'), (SELECT id FROM movies WHERE title = 'Dune')),
-  ((SELECT id FROM spectators WHERE email = 'luc.martin@example.com'), (SELECT id FROM movies WHERE title = 'The Irishman'));
+  ((SELECT id FROM spectators WHERE email = 'luc.martin@example.com'), (SELECT id FROM movies WHERE title = 'The Irishman')),
+  ((SELECT id FROM spectators WHERE email = 'alice.smith@example.com'), (SELECT id FROM movies WHERE title = 'The Dark Knight')),
+  ((SELECT id FROM spectators WHERE email = 'alice.smith@example.com'), (SELECT id FROM movies WHERE title = 'Interstellar')),
+  ((SELECT id FROM spectators WHERE email = 'bob.johnson@example.com'), (SELECT id FROM movies WHERE title = 'Kill Bill: Vol. 1')),
+  ((SELECT id FROM spectators WHERE email = 'bob.johnson@example.com'), (SELECT id FROM movies WHERE title = 'Pulp Fiction')),
+  ((SELECT id FROM spectators WHERE email = 'eve.williams@example.com'), (SELECT id FROM movies WHERE title = 'Lost in Translation')),
+  ((SELECT id FROM spectators WHERE email = 'eve.williams@example.com'), (SELECT id FROM movies WHERE title = 'Lady Bird')),
+  ((SELECT id FROM spectators WHERE email = 'thomas.lefebvre@example.com'), (SELECT id FROM movies WHERE title = 'The Godfather')),
+  ((SELECT id FROM spectators WHERE email = 'thomas.lefebvre@example.com'), (SELECT id FROM movies WHERE title = 'Goodfellas')),
+  ((SELECT id FROM spectators WHERE email = 'julie.dubois@example.com'), (SELECT id FROM movies WHERE title = 'Titanic')),
+  ((SELECT id FROM spectators WHERE email = 'julie.dubois@example.com'), (SELECT id FROM movies WHERE title = 'E.T. the Extra-Terrestrial')),
+  ((SELECT id FROM spectators WHERE email = 'francois.petit@example.com'), (SELECT id FROM movies WHERE title = 'Alien')),
+  ((SELECT id FROM spectators WHERE email = 'francois.petit@example.com'), (SELECT id FROM movies WHERE title = 'Gladiator')),
+  ((SELECT id FROM spectators WHERE email = 'laura.moreau@example.com'), (SELECT id FROM movies WHERE title = 'Psycho')),
+  ((SELECT id FROM spectators WHERE email = 'laura.moreau@example.com'), (SELECT id FROM movies WHERE title = 'Arrival')),
+  ((SELECT id FROM spectators WHERE email = 'alexandre.blanc@example.com'), (SELECT id FROM movies WHERE title = 'Dune')),
+  ((SELECT id FROM spectators WHERE email = 'alexandre.blanc@example.com'), (SELECT id FROM movies WHERE title = 'Sicario')),
+  ((SELECT id FROM spectators WHERE email = 'emilie.roux@example.com'), (SELECT id FROM movies WHERE title = 'Wonder Woman')),
+  ((SELECT id FROM spectators WHERE email = 'emilie.roux@example.com'), (SELECT id FROM movies WHERE title = 'Avatar'));
 
--- Lien entre les personnages et les spectateurs (favoris)
+-- ===============================================
+-- LIEN ENTRE LES PERSONNAGES ET LES SPECTATEURS (FAVORIS)
+-- ===============================================
 INSERT INTO spectators_characters (spectator_id, character_id) VALUES
-  ((SELECT id FROM spectators WHERE email = 'alice.smith@example.com'),
-   (SELECT id FROM characters WHERE name_character = 'Dom Cobb')),
-  ((SELECT id FROM spectators WHERE email = 'bob.johnson@example.com'),
-   (SELECT id FROM characters WHERE name_character = 'Vincent Vega')),
-  ((SELECT id FROM spectators WHERE email = 'eve.williams@example.com'),
-   (SELECT id FROM characters WHERE name_character = 'Charlotte')),
-  ((SELECT id FROM spectators WHERE email = 'jean.dupont@example.com'),
-   (SELECT id FROM characters WHERE name_character = 'Dr. Alan Grant')),
-  ((SELECT id FROM spectators WHERE email = 'marie.curie@example.com'),
-   (SELECT id FROM characters WHERE name_character = 'Jake Sully')),
-  ((SELECT id FROM spectators WHERE email = 'luc.martin@example.com'),
-   (SELECT id FROM characters WHERE name_character = 'Christine McPherson')),
-  ((SELECT id FROM spectators WHERE email = 'sophie.durand@example.com'),
-   (SELECT id FROM characters WHERE name_character = 'Neytiri')),
-  ((SELECT id FROM spectators WHERE email = 'paul.morel@example.com'),
-   (SELECT id FROM characters WHERE name_character = 'Ellie Sattler')),
-  ((SELECT id FROM spectators WHERE email = 'jean.dupont@example.com'),
-   (SELECT id FROM characters WHERE name_character = 'Paul Atreides')),
-  ((SELECT id FROM spectators WHERE email = 'claire.bernard@example.com'),
-   (SELECT id FROM characters WHERE name_character = 'Diana Prince')),
-  ((SELECT id FROM spectators WHERE email = 'marie.curie@example.com'),
-   (SELECT id FROM characters WHERE name_character = 'Frank Sheeran')),
-  ((SELECT id FROM spectators WHERE email = 'luc.martin@example.com'),
-   (SELECT id FROM characters WHERE name_character = 'Chani Kynes')),
-  ((SELECT id FROM spectators WHERE email = 'sophie.durand@example.com'),
-   (SELECT id FROM characters WHERE name_character = 'Jimmy Hoffa'));
+  ((SELECT id FROM spectators WHERE email = 'alice.smith@example.com'), (SELECT id FROM characters WHERE name_character = 'Dom Cobb')),
+  ((SELECT id FROM spectators WHERE email = 'bob.johnson@example.com'), (SELECT id FROM characters WHERE name_character = 'Vincent Vega')),
+  ((SELECT id FROM spectators WHERE email = 'eve.williams@example.com'), (SELECT id FROM characters WHERE name_character = 'Charlotte')),
+  ((SELECT id FROM spectators WHERE email = 'jean.dupont@example.com'), (SELECT id FROM characters WHERE name_character = 'Dr. Alan Grant')),
+  ((SELECT id FROM spectators WHERE email = 'marie.curie@example.com'), (SELECT id FROM characters WHERE name_character = 'Jake Sully')),
+  ((SELECT id FROM spectators WHERE email = 'luc.martin@example.com'), (SELECT id FROM characters WHERE name_character = 'Christine McPherson')),
+  ((SELECT id FROM spectators WHERE email = 'sophie.durand@example.com'), (SELECT id FROM characters WHERE name_character = 'Neytiri')),
+  ((SELECT id FROM spectators WHERE email = 'paul.morel@example.com'), (SELECT id FROM characters WHERE name_character = 'Ellie Sattler')),
+  ((SELECT id FROM spectators WHERE email = 'jean.dupont@example.com'), (SELECT id FROM characters WHERE name_character = 'Paul Atreides')),
+  ((SELECT id FROM spectators WHERE email = 'claire.bernard@example.com'), (SELECT id FROM characters WHERE name_character = 'Diana Prince')),
+  ((SELECT id FROM spectators WHERE email = 'marie.curie@example.com'), (SELECT id FROM characters WHERE name_character = 'Frank Sheeran')),
+  ((SELECT id FROM spectators WHERE email = 'luc.martin@example.com'), (SELECT id FROM characters WHERE name_character = 'Chani Kynes')),
+  ((SELECT id FROM spectators WHERE email = 'sophie.durand@example.com'), (SELECT id FROM characters WHERE name_character = 'Jimmy Hoffa')),
+  ((SELECT id FROM spectators WHERE email = 'alice.smith@example.com'), (SELECT id FROM characters WHERE name_character = 'Bruce Wayne')),
+  ((SELECT id FROM spectators WHERE email = 'alice.smith@example.com'), (SELECT id FROM characters WHERE name_character = 'Joseph Cooper')),
+  ((SELECT id FROM spectators WHERE email = 'bob.johnson@example.com'), (SELECT id FROM characters WHERE name_character = 'Beatrix Kiddo')),
+  ((SELECT id FROM spectators WHERE email = 'thomas.lefebvre@example.com'), (SELECT id FROM characters WHERE name_character = 'Vito Corleone')),
+  ((SELECT id FROM spectators WHERE email = 'thomas.lefebvre@example.com'), (SELECT id FROM characters WHERE name_character = 'Henry Hill')),
+  ((SELECT id FROM spectators WHERE email = 'julie.dubois@example.com'), (SELECT id FROM characters WHERE name_character = 'Jack Dawson')),
+  ((SELECT id FROM spectators WHERE email = 'julie.dubois@example.com'), (SELECT id FROM characters WHERE name_character = 'Rose DeWitt Bukater')),
+  ((SELECT id FROM spectators WHERE email = 'julie.dubois@example.com'), (SELECT id FROM characters WHERE name_character = 'Elliott')),
+  ((SELECT id FROM spectators WHERE email = 'francois.petit@example.com'), (SELECT id FROM characters WHERE name_character = 'Ellen Ripley')),
+  ((SELECT id FROM spectators WHERE email = 'francois.petit@example.com'), (SELECT id FROM characters WHERE name_character = 'Maximus Decimus Meridius')),
+  ((SELECT id FROM spectators WHERE email = 'laura.moreau@example.com'), (SELECT id FROM characters WHERE name_character = 'Norman Bates')),
+  ((SELECT id FROM spectators WHERE email = 'laura.moreau@example.com'), (SELECT id FROM characters WHERE name_character = 'Louise Banks')),
+  ((SELECT id FROM spectators WHERE email = 'alexandre.blanc@example.com'), (SELECT id FROM characters WHERE name_character = 'Paul Atreides')),
+  ((SELECT id FROM spectators WHERE email = 'alexandre.blanc@example.com'), (SELECT id FROM characters WHERE name_character = 'Kate Macer')),
+  ((SELECT id FROM spectators WHERE email = 'emilie.roux@example.com'), (SELECT id FROM characters WHERE name_character = 'Diana Prince')),
+  ((SELECT id FROM spectators WHERE email = 'emilie.roux@example.com'), (SELECT id FROM characters WHERE name_character = 'Neytiri'));
