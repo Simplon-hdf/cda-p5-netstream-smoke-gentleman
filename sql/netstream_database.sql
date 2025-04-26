@@ -1,18 +1,4 @@
--- Connexion à PostgreSQL
-psql -U postgres
-
--- Création de la base de données
-CREATE DATABASE netstream;
-
-
--- Création de l'administrateur de la base de données
-CREATE ROLE netstream_admin WITH LOGIN PASSWORD 'secret';
-
--- Attribution des droits d'accès à l'administrateur
-GRANT ALL PRIVILEGES ON DATABASE netstream TO netstream_admin;
-
--- Connexion à la base de données
-\c netstream
+-- Structure de la base de données NetStream
 
 -- Création de la table des réalisateurs
 CREATE TABLE IF NOT EXISTS directors(
