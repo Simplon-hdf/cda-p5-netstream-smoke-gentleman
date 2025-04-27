@@ -1,5 +1,22 @@
 # cda-p5-netstream-smoke-gentleman
 
+Ce projet est a propos de la creation de la base de donné de netstream. De la conception de la base de donnée a ça création.
+
+##  Sommaire
+
+- [Règles de gestion](.docs/business-rules.md)
+- [Lexique](.docs/data-glossary.md)
+- [Dictionnaire de données](.docs/data-dictionary.md)
+- [MCD](.docs/MCD.png)
+- [MLD](.docs/MLD.png)
+- [MPD](.docs/MPD.png)
+- [Choix du SGBDR](.docs/database-engine-selection.md)
+- [Politique de sauvegarde](.docs/save.md)
+- [Les requêtes SQL](#requêtes-SQL)
+- [Les requêtes avancées](#requêtes-avancées)
+
+
+
 ## Requêtes SQL
 
 Les titres et dates de sortie des films du plus récent au plus ancien
