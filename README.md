@@ -286,22 +286,26 @@ $$;
 
 CREATE OR REPLACE FUNCTION log_spectator_updates()
 RETURNS TRIGGER AS $$
+DECLARE
+    old_row jsonb := to_jsonb(OLD);
+    new_row jsonb := to_jsonb(NEW);
 BEGIN
     INSERT INTO archives (id, archive_date, modified_field, old_value, new_value, spectator_id)
     SELECT
         gen_random_uuid(),
         NOW(),
         col.column_name,
-        (OLD.*)::jsonb ->> col.column_name,
-        (NEW.*)::jsonb ->> col.column_name,
+        old_row ->> col.column_name,
+        new_row ->> col.column_name,
         NEW.id
     FROM information_schema.columns col
     WHERE col.table_name = 'spectators'
-      AND (OLD.*)::jsonb ->> col.column_name IS DISTINCT FROM (NEW.*)::jsonb ->> col.column_name;
+      AND old_row ->> col.column_name IS DISTINCT FROM new_row ->> col.column_name;
 
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
+
 
 -- Création du trigger qui s'active après chaque modification d'un spectateur
 
