@@ -32,7 +32,8 @@ CREATE TABLE IF NOT EXISTS movies(
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP,
     director_id uuid NOT NULL,
-    FOREIGN KEY (director_id) REFERENCES directors(id)
+    FOREIGN KEY (director_id) REFERENCES directors(id),
+    CONSTRAINT unique_movie UNIQUE (title, length, release_date, director_id)
 );
 
 -- Création de la table des personnages
@@ -50,7 +51,8 @@ CREATE TABLE IF NOT EXISTS actors(
     last_name_actor VARCHAR(120) NOT NULL,
     date_of_birth DATE NOT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
-    updated_at TIMESTAMP
+    updated_at TIMESTAMP,
+    CONSTRAINT unique_actor UNIQUE (first_name_actor, last_name_actor, date_of_birth)
 );
 
 -- Création de la table des spectateurs
