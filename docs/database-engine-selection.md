@@ -16,12 +16,12 @@ Le choix d'un **Système de Gestion de Bases de Données Relationnelles (SGBDR)*
 
 ---
 
-## Critères de sélection
+## 📊 Critères de sélection
 Pour sélectionner le SGBDR idéal, plusieurs critères ont été évalués :
 1. **Performances** : Temps de réponse pour les opérations CRUD.
-2. **Fiabilité** : Support des transactions ACID.
+2. **Fiabilité** : Support des transactions **ACID**.
 3. **Flexibilité** : Gestion des types de données variés (JSON, textuel, etc.).
-4. **Évolutivité** : Aptitude du SGBDR à s'adapter à une augmentation des volumes de données et des charges de travail, tout en maintenant des performances optimales.
+4. **Évolutivité** : Capacité à gérer une augmentation des volumes de données et des charges de travail.
 5. **Communauté et support** : Documentation, outils et communauté active.
 6. **Coût** : Logiciel libre ou licences abordables.
 7. **Sécurité** : Protection des données, gestion des accès et conformité aux standards.
