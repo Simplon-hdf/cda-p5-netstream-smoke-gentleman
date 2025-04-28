@@ -28,23 +28,25 @@ Pour sélectionner le SGBDR idéal, plusieurs critères ont été évalués :
 
 ---
 
-## Analyse des options
-### 1. PostgreSQL
+## 🔍 Analyse des options
+
+### 1️⃣ **PostgreSQL**
 - **Avantages :**
-  - Excellentes performances pour les requêtes complexes.
-  - Transactions ACID robustes.
-  - Support avancé des types de données (JSONB, XML, tableaux multidimensionnels, types composites, UUID).
-  - Très évolutif (réplication, partitions).
+  - Excellentes performances pour les **requêtes complexes**.
+  - Transactions **ACID** robustes.
+  - Support avancé des types de données (JSONB, XML, UUID, etc.).
+  - Très évolutif (réplication, partitionnement).
   - Communauté active et nombreuses extensions disponibles.
-  - **Sécurité** :
-    - Système de rôles et privilèges très granulaire
-    - Support natif du chiffrement SSL/TLS
-    - Authentification forte (SCRAM-SHA-256, GSSAPI, etc.)
-    - Row-level security pour le contrôle d'accès précis
-    - Mises à jour de sécurité régulières
+  - **Sécurité :**
+    - Système de rôles et privilèges granulaire.
+    - Support natif du chiffrement SSL/TLS.
+    - Authentification forte (SCRAM-SHA-256, GSSAPI, etc.).
+    - Row-level security pour un contrôle d'accès précis.
 - **Inconvénients :**
-  - Peut être plus complexe à configurer pour des utilisateurs débutants.
+  - Peut être complexe à configurer pour des débutants.
   - Consommation mémoire potentiellement plus élevée.
+
+---
 
 ### 2. MySQL/MariaDB
 - **Avantages :**
