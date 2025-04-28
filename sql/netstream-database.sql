@@ -1,4 +1,22 @@
+<<<<<<< HEAD
+-- Connexion à PostgreSQL
+psql -U postgres
+
+-- Création de la base de données
+CREATE DATABASE netstream;
+
+
+-- Création de l'administrateur de la base de données
+CREATE ROLE netstream_admin WITH LOGIN PASSWORD 'secret';
+
+-- Attribution des droits d'accès à l'administrateur
+GRANT ALL PRIVILEGES ON DATABASE netstream TO netstream_admin;
+
+-- Connexion à la base de données
+\c netstream
+=======
 -- Structure de la base de données NetStream
+>>>>>>> upstream/develop
 
 -- Création de la table des réalisateurs
 CREATE TABLE IF NOT EXISTS directors(
@@ -18,7 +36,8 @@ CREATE TABLE IF NOT EXISTS movies(
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP,
     director_id uuid NOT NULL,
-    FOREIGN KEY (director_id) REFERENCES directors(id)
+    FOREIGN KEY (director_id) REFERENCES directors(id),
+    CONSTRAINT unique_movie UNIQUE (title, length, release_date, director_id)
 );
 
 -- Création de la table des personnages
@@ -36,7 +55,8 @@ CREATE TABLE IF NOT EXISTS actors(
     last_name_actor VARCHAR(120) NOT NULL,
     date_of_birth DATE NOT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
-    updated_at TIMESTAMP
+    updated_at TIMESTAMP,
+    CONSTRAINT unique_actor UNIQUE (first_name_actor, last_name_actor, date_of_birth)
 );
 
 -- Création de la table des spectateurs

@@ -1,10 +1,27 @@
 # cda-p5-netstream-smoke-gentleman
 
+Ce projet concerne la création de la base de données de Netstream, de sa conception à sa mise en place.
+
+##  Sommaire
+
+- [Règles de gestion](.docs/business-rules.md)
+- [Lexique](.docs/data-glossary.md)
+- [Dictionnaire de données](.docs/data-dictionary.md)
+- [MCD](.docs/MCD.png)
+- [MLD](.docs/MLD.png)
+- [MPD](.docs/MPD.png)
+- [Choix du SGBDR](.docs/database-engine-selection.md)
+- [Politique de sauvegarde](.docs/save.md)
+- [Les requêtes SQL](#requêtes-SQL)
+- [Les requêtes avancées](#requêtes-avancées)
+
+
+
 ## Requêtes SQL
 
 Les titres et dates de sortie des films du plus récent au plus ancien
 
-```
+```sql
 SELECT title, release_date from movies
 ORDER BY release_date DESC;
 
@@ -12,7 +29,7 @@ ORDER BY release_date DESC;
 
 Les noms, prénoms et âges des acteurs/actrices de plus de 30 ans dans l'ordre alphabétique
 
-```
+```sql
 SELECT first_name_actor, last_name_actor, EXTRACT(YEAR FROM AGE(CURRENT_DATE, date_of_birth)) AS age from actors
  WHERE EXTRACT(YEAR FROM AGE(CURRENT_DATE, date_of_birth)) > 30;
 
@@ -20,7 +37,7 @@ SELECT first_name_actor, last_name_actor, EXTRACT(YEAR FROM AGE(CURRENT_DATE, da
 
 La liste des acteurs/actrices principaux pour un film donné
 
-```
+```sql
 SELECT first_name_actor, last_name_actor from actors
     INNER JOIN character_actors ON character_actors.actor_id = actors.id
         INNER JOIN characters ON characters.id = character_actors.character_id
@@ -31,7 +48,7 @@ WHERE title = 'Dune' and character_type = 'principal';
 
 La liste des films pour un acteur/actrice donné
 
-```
+```sql
 SELECT title from movies
     INNER JOIN movies_characters ON movies_characters.movie_id = movies.id
         INNER JOIN characters ON characters.id = movies_characters.character_id
@@ -43,28 +60,37 @@ SELECT title from movies
 
 Ajouter un film
 
-```
-INSERT INTO movies (title, length, release_date, director_id) VALUES
-  ('Inception', 148, '2010-07-16', (SELECT id FROM directors WHERE last_name_director = 'Nolan')),
+```sql
+INSERT INTO movies (title, length, release_date, director_id)
+ VALUES (
+   'Inception',
+   150,
+   '2010-07-16',
+   (SELECT id FROM directors WHERE last_name_director = 'Nolan')
+ )
+ ON CONFLICT (title, length, release_date, director_id)
+ DO NOTHING;
 ```
 Ajouter un acteur/actrice
 
-```
-INSERT INTO actors (first_name_actor, last_name_actor, date_of_birth) VALUES
-  ('Leonardo', 'DiCaprio', '1974-11-11'),
+```sql
+INSERT INTO actors (first_name_actor, last_name_actor, date_of_birth)
+VALUES ('Leonardo', 'DiCaprio', '1974-11-11')
+ON CONFLICT (first_name_actor, last_name_actor, date_of_birth)
+DO NOTHING;
 ```
 
 Modifier un film
 
-```
+```sql
 UPDATE movies
- SET
-   length = 170,
- WHERE title = 'Inception';
+  SET length = 175
+  WHERE title = 'Inception' AND length = 148 AND release_date = '2010-07-16';
 ```
+
 Supprimer un acteur/actrice
 
-```
+```sql
 DELETE FROM actors
 WHERE first_name_actor = 'Leonardo'
   AND last_name_actor = 'DiCaprio'
@@ -72,7 +98,7 @@ WHERE first_name_actor = 'Leonardo'
 ```
 Afficher les 3 derniers acteurs/actrices ajouté(e)s
 
-```
+```sql
 SELECT * from actors
  ORDER BY created_at DESC
  LIMIT 3;
@@ -84,85 +110,114 @@ Fonction pour lister les films selon les réalisateurs :
 
 ```sql
 CREATE OR REPLACE FUNCTION listFilmsRealisateur(
-    inputFirstName VARCHAR,
-    inputLastName VARCHAR
-)
-RETURNS TABLE(title TEXT, release_date DATE)
-LANGUAGE plpgsql
-AS $$
-BEGIN
-    RETURN QUERY
-    SELECT m.title, m.release_date
-    FROM movies m
-    INNER JOIN directors d ON m.director_id = d.id
-    WHERE d.first_name = inputFirstName
-       OR d.last_name = inputLastName;
-END;
-$$;
+     inputFirstName VARCHAR,
+     inputLastName VARCHAR
+ )
+ RETURNS TABLE(title VARCHAR(200), release_date DATE)
+ LANGUAGE plpgsql
+ AS $$
+ BEGIN
+     RETURN QUERY
+     SELECT m.title, m.release_date
+     FROM movies m
+     INNER JOIN directors d ON m.director_id = d.id
+     WHERE d.first_name_director = inputFirstName
+        OR d.last_name_director = inputLastName;
+ END;
+ $$;
+
 ```
 Opérations CRUD pour ajouter un acteur au sein d'un film avec des procédures stockées :
 
 ```sql
 -- Procédure pour ajouter un nouvel acteur à un film
 CREATE OR REPLACE PROCEDURE add_actor_to_movie(
-    actorFirstName VARCHAR,
-    actorLastName VARCHAR,
-    actorDOB DATE,
-    movieTitle VARCHAR
-)
-LANGUAGE plpgsql
-AS $$
-DECLARE
-    actorId UUID;
-    movieId UUID;
-BEGIN
-    -- Vérifier si l'acteur existe déjà
-    SELECT id INTO actorId
-    FROM actors
-    WHERE first_name_actor = actorFirstName AND last_name_actor = actorLastName AND date_of_birth = actorDOB;
-
-    -- Si l'acteur n'existe pas, le créer
-    IF actorId IS NULL THEN
-        INSERT INTO actors (first_name_actor, last_name_actor, date_of_birth)
-        VALUES (actorFirstName, actorLastName, actorDOB)
-        RETURNING id INTO actorId;
-    END IF;
-
-    -- Récupérer l'ID du film
-    SELECT id INTO movieId
-    FROM movies
-    WHERE title = movieTitle;
-
-    -- Vérifier si le film existe
-    IF movieId IS NULL THEN
-        RAISE EXCEPTION 'Le film % n''existe pas.', movieTitle;
-    END IF;
-
-    -- Ajouter l'acteur au film (via un personnage générique)
-    INSERT INTO movies_characters (movie_id, character_id, character_type)
-    VALUES (movieId, gen_random_uuid(), 'Generic Character');
+     actorFirstName VARCHAR,
+     actorLastName VARCHAR,
+     actorDOB DATE,
+     movieTitle VARCHAR,
+     movieReleaseDate DATE,
+     movieLength INT
+ )
+ LANGUAGE plpgsql
+ AS $$
+ DECLARE
+     actorId UUID;
+     movieId UUID;
+     characterId UUID;
+ BEGIN
+     -- Vérifier si l'acteur existe déjà
+     SELECT id INTO actorId
+     FROM actors
+     WHERE first_name_actor = actorFirstName AND last_name_actor = actorLastName AND date_of_birth = actorDOB;
+ 
+     -- Si l'acteur n'existe pas, le créer
+     IF actorId IS NULL THEN
+         INSERT INTO actors (first_name_actor, last_name_actor, date_of_birth)
+         VALUES (actorFirstName, actorLastName, actorDOB)
+         RETURNING id INTO actorId;
+     END IF;
+ 
+     -- Récupérer l'ID du film avec le titre, la date de sortie et la durée pour le différencier
+     SELECT id INTO movieId
+     FROM movies
+     WHERE title = movieTitle
+       AND release_date = movieReleaseDate
+       AND length = movieLength;
+ 
+     -- Vérifier si le film existe
+     IF movieId IS NULL THEN
+         RAISE EXCEPTION 'Le film % avec la date % et la durée % n''existe pas.', movieTitle, movieReleaseDate, movieLength;
+     END IF;
+ 
+     -- Vérifier si un personnage générique existe déjà
+     SELECT id INTO characterId
+     FROM characters
+     WHERE name_character = 'Generic Character';
+ 
+     -- Si le personnage générique n'existe pas, le créer
+     IF characterId IS NULL THEN
+         INSERT INTO characters (name_character)
+         VALUES ('Generic Character')
+         RETURNING id INTO characterId;
+     END IF;
+ 
+     -- Ajouter l'acteur au film (via le personnage générique)
+     INSERT INTO movies_characters (movie_id, character_id, character_type)
+     VALUES (movieId, characterId, 'Generic Character');
+ 
+     -- Ajouter l'association entre l'acteur et le personnage générique
+     INSERT INTO character_actors (actor_id, character_id)
+     VALUES (actorId, characterId);
+ 
 END;
 $$;
+
 
 -- Procédure pour lire les acteurs d'un film
-CREATE OR REPLACE PROCEDURE get_actors_by_movie(
-    movieTitle VARCHAR
-)
-LANGUAGE plpgsql
-AS $$
-BEGIN
-    -- Afficher les acteurs associés au film
-    PERFORM
-    (
-        SELECT a.first_name_actor, a.last_name_actor, a.date_of_birth
-        FROM actors a
-        INNER JOIN character_actors ca ON a.id = ca.actor_id
-        INNER JOIN movies_characters mc ON ca.character_id = mc.character_id
-        INNER JOIN movies m ON mc.movie_id = m.id
-        WHERE m.title = movieTitle
-    );
+CREATE OR REPLACE FUNCTION get_actors_by_movie(
+     movieTitle VARCHAR,
+     movieLength INT,
+     movieReleaseDate DATE
+ )
+ RETURNS TABLE(first_name_actor VARCHAR, last_name_actor VARCHAR, date_of_birth DATE)
+ LANGUAGE plpgsql
+ AS $$
+ BEGIN
+     -- Retourner les acteurs associés au film avec les critères supplémentaires
+     RETURN QUERY
+     SELECT a.first_name_actor, a.last_name_actor, a.date_of_birth
+     FROM actors a
+     INNER JOIN character_actors ca ON a.id = ca.actor_id
+     INNER JOIN movies_characters mc ON ca.character_id = mc.character_id
+     INNER JOIN movies m ON mc.movie_id = m.id
+     WHERE m.title = movieTitle
+       AND m.length = movieLength
+       AND m.release_date = movieReleaseDate;
 END;
 $$;
+
+
 
 -- Procédure pour mettre à jour les informations d'un acteur
 CREATE OR REPLACE PROCEDURE update_actor(
@@ -231,22 +286,26 @@ $$;
 
 CREATE OR REPLACE FUNCTION log_spectator_updates()
 RETURNS TRIGGER AS $$
+DECLARE
+    old_row jsonb := to_jsonb(OLD);
+    new_row jsonb := to_jsonb(NEW);
 BEGIN
     INSERT INTO archives (id, archive_date, modified_field, old_value, new_value, spectator_id)
     SELECT
         gen_random_uuid(),
         NOW(),
         col.column_name,
-        (OLD.*)::jsonb ->> col.column_name,
-        (NEW.*)::jsonb ->> col.column_name,
+        old_row ->> col.column_name,
+        new_row ->> col.column_name,
         NEW.id
     FROM information_schema.columns col
     WHERE col.table_name = 'spectators'
-      AND (OLD.*)::jsonb ->> col.column_name IS DISTINCT FROM (NEW.*)::jsonb ->> col.column_name;
+      AND old_row ->> col.column_name IS DISTINCT FROM new_row ->> col.column_name;
 
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
+
 
 -- Création du trigger qui s'active après chaque modification d'un spectateur
 
