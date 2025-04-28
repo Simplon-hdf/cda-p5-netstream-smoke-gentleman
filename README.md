@@ -82,7 +82,7 @@ ON CONFLICT (first_name_actor, last_name_actor, date_of_birth)
 DO NOTHING;
 ```
 
-Modifier un film
+### ✏️ Modifier un film
 
 ```sql
 UPDATE movies
@@ -90,7 +90,7 @@ UPDATE movies
   WHERE title = 'Inception' AND length = 148 AND release_date = '2010-07-16';
 ```
 
-Supprimer un acteur/actrice
+### ❌ Supprimer un acteur/actrice
 
 ```sql
 DELETE FROM actors
@@ -98,13 +98,14 @@ WHERE first_name_actor = 'Leonardo'
   AND last_name_actor = 'DiCaprio'
   AND date_of_birth = '1974-11-11';
 ```
-Afficher les 3 derniers acteurs/actrices ajouté(e)s
+### 🕒 Afficher les 3 derniers acteurs/actrices ajouté(e)s
 
 ```sql
 SELECT * from actors
  ORDER BY created_at DESC
  LIMIT 3;
 ```
+---
 
 ## Requêtes avancées
 
