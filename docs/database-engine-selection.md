@@ -48,22 +48,19 @@ Pour sélectionner le SGBDR idéal, plusieurs critères ont été évalués :
 
 ---
 
-### 2. MySQL/MariaDB
+### 2️⃣ **MySQL/MariaDB**
 - **Avantages :**
   - Performances solides pour des besoins standards.
   - Large adoption et support par de nombreux hébergeurs.
   - MariaDB offre des améliorations open-source basées sur MySQL.
-  - **Sécurité** :
-    - Authentification des connexions par plugin
-    - Système de privilèges par utilisateur
-    - Support du chiffrement des données au repos
+  - **Sécurité :**
+    - Authentification des connexions par plugin.
+    - Support du chiffrement des données au repos.
 - **Inconvénients :**
   - Moins performant pour des requêtes complexes ou des charges élevées.
   - Fonctionnalités moins avancées que PostgreSQL (JSON, transactions).
-  - **Sécurité** :
-    - Contrôle d'accès moins granulaire que PostgreSQL
-    - Historique de vulnérabilités plus important
-    - Configuration par défaut moins sécurisée
+
+---
 
 ### 3. SQLite (option légère)
 - **Avantages :**
