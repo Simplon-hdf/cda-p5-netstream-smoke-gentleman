@@ -1,8 +1,11 @@
-# Documentation d'installation et de configuration de la base de données NetStream
+# 📘 Documentation d'installation et de configuration de la base de données NetStream
 
-## Installation de PostgreSQL
+---
 
-### Sous Linux (Ubuntu/Debian)
+## 🚀 Installation de PostgreSQL
+
+### 🐧 Sous Linux (Ubuntu/Debian)
+
 ```bash
 # Mise à jour des dépôts
 sudo apt update
@@ -14,7 +17,7 @@ sudo apt install postgresql postgresql-contrib
 sudo systemctl status postgresql
 ```
 
-### Sous macOS (avec Homebrew)
+### 🍎 Sous macOS (avec Homebrew)
 ```bash
 # Installation via Homebrew
 brew install postgresql
@@ -23,7 +26,7 @@ brew install postgresql
 brew services start postgresql
 ```
 
-### Sous Windows
+### 🖥️ Sous Windows
 1. Téléchargez l'installateur depuis [le site officiel de PostgreSQL](https://www.postgresql.org/download/windows/)
 2. Exécutez l'installateur et suivez les instructions
 3. Laissez le port par défaut (5432) sauf si vous avez des contraintes spécifiques
