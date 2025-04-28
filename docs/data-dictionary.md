@@ -25,13 +25,15 @@
 
 ---
 
-## Rôles
+## 🦸 Rôles
 
-| Attribut         | Type           | Description                | Exemple                              |
-| ---------------- | -------------- | -------------------------- | ------------------------------------ |
-| character_id     | Alphanumérique | Identifiant unique du rôle | 4f9a2b18-7c7b-4c8a-bc90-9e0b1e2d4a5f |
-| character_name   | Alphanumérique | Nom du rôle                | Spider-man                           |
-| character_type   | Alphanumérique | Type de rôle               | Principal                            |
+| **Attribut**       | **Type**       | **Description**           | **Exemple**                          |
+| ------------------ | -------------- | ------------------------- | ------------------------------------ |
+| `character_id`     | Alphanumérique | Identifiant unique du rôle | `4f9a2b18-7c7b-4c8a-bc90-9e0b1e2d4a5f` |
+| `character_name`   | Alphanumérique | Nom du rôle               | `Spider-man`                         |
+| `character_type`   | Alphanumérique | Type de rôle              | `Principal`                          |
+
+---
 
 ## Réalisateurs
 
