@@ -14,14 +14,16 @@
 
 ---
 
-## Acteurs
+## 🎭 Acteurs
 
-| Attribut         | Type           | Description                    | Exemple                              |
-| ---------------- | -------------- | ------------------------------ | ------------------------------------ |
-| actor_id         | Alphanumérique | Identifiant unique de l'acteur | 4f9a2b18-7c7b-4c8a-bc90-9e0b1e2d4a5f |
-| first_name_actor | Alphanumérique | Prénom de l'acteur             | Tom                                  |
-| last_name_actor  | Alphanumérique | Nom de l'acteur                | Holland                              |
-| date_of_birth    | date           | Date de naissance              | 01-06-1996                           |
+| **Attribut**         | **Type**       | **Description**               | **Exemple**                          |
+| -------------------- | -------------- | ----------------------------- | ------------------------------------ |
+| `actor_id`           | Alphanumérique | Identifiant unique de l'acteur | `4f9a2b18-7c7b-4c8a-bc90-9e0b1e2d4a5f` |
+| `first_name_actor`   | Alphanumérique | Prénom de l'acteur            | `Tom`                                |
+| `last_name_actor`    | Alphanumérique | Nom de l'acteur               | `Holland`                            |
+| `date_of_birth`      | Date           | Date de naissance             | `01-06-1996`                         |
+
+---
 
 ## Rôles
 
