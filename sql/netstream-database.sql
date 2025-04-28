@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 -- Connexion à PostgreSQL
 psql -U postgres
 
@@ -13,6 +14,9 @@ GRANT ALL PRIVILEGES ON DATABASE netstream TO netstream_admin;
 
 -- Connexion à la base de données
 \c netstream
+=======
+-- Structure de la base de données NetStream
+>>>>>>> upstream/develop
 
 -- Création de la table des réalisateurs
 CREATE TABLE IF NOT EXISTS directors(
