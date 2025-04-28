@@ -7,12 +7,12 @@ Le choix d'un **Système de Gestion de Bases de Données Relationnelles (SGBDR)*
 
 ---
 
-## Contexte du projet
-- **Exigences clés :**
-  - Manipulation de données relationnelles (utilisateurs, transactions, procédures).
-  - Performances stables avec des charges modérées à élevées.
-  - Support des requêtes complexes (jointures, agrégations).
-  - Evolutivité pour accompagner la croissance du projet.
+## 🌟 Contexte du projet
+### **Exigences clés :**
+- Manipulation de **données relationnelles** (utilisateurs, transactions, procédures).
+- Performances stables avec des charges **modérées à élevées**.
+- Support des **requêtes complexes** (jointures, agrégations).
+- **Évolutivité** pour accompagner la croissance du projet.
 
 ---
 
