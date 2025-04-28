@@ -59,10 +59,13 @@ Pour sélectionner le SGBDR idéal, plusieurs critères ont été évalués :
 - **Inconvénients :**
   - Moins performant pour des requêtes complexes ou des charges élevées.
   - Fonctionnalités moins avancées que PostgreSQL (JSON, transactions).
-
+  - **Sécurité** :
+    - Contrôle d'accès moins granulaire que PostgreSQL
+    - Historique de vulnérabilités plus important
+    - Configuration par défaut moins sécurisée
 ---
 
-### 3. SQLite (option légère)
+### 3️⃣ **SQLite (option légère)**
 - **Avantages :**
   - Aucun besoin de serveur (base de données embarquée).
   - Simple à configurer et léger.
@@ -76,6 +79,7 @@ Pour sélectionner le SGBDR idéal, plusieurs critères ont été évalués :
     - Absence de gestion des utilisateurs et des droits
     - Dépendance à la sécurité du système de fichiers hôte
     - Vulnérable aux corruptions en cas d'accès concurrent
+---
 
 ### 4. MongoDB (NoSQL pour comparaison)
 - **Avantages :**
