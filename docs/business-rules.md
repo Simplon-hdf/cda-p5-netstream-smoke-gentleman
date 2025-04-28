@@ -35,11 +35,12 @@
 
 ---
 
-## Les spectateurs
-- RG18 : Un spectateur doit avoir nom
-- RG19 : Un spectateur doit avoir un prénom
-- RG20 : Un spectateur doit avoir un email
-- RG21 : Un spectateur doit avoir un mot de passe
-- RG22 : Un spectateur peut avoir un ou plusieurs personnages préférés (non obligatoire)
-- RG23 : Un spectateur peut avoir un ou plusieurs films préférés (non obligatoire)
-​
+## 👤 Les spectateurs
+- **RG18** : Un spectateur doit avoir un **nom**.
+- **RG19** : Un spectateur doit avoir un **prénom**.
+- **RG20** : Un spectateur doit avoir un **email**.
+- **RG21** : Un spectateur doit avoir un **mot de passe**.
+- **RG22** : Un spectateur peut avoir un ou plusieurs **personnages préférés** (non obligatoire).
+- **RG23** : Un spectateur peut avoir un ou plusieurs **films préférés** (non obligatoire).
+
+---
