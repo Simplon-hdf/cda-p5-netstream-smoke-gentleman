@@ -1,6 +1,8 @@
-# cda-p5-netstream-smoke-gentleman
+# 📽️ cda-p5-netstream-smoke-gentleman
 
-Ce projet concerne la création de la base de données de Netstream, de sa conception à sa mise en place.
+Ce projet concerne la création de la base de données de **Netstream**, de sa conception à sa mise en place.
+
+---
 
 ##  Sommaire
 
