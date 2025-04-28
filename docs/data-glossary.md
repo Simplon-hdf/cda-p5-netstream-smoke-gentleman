@@ -21,4 +21,7 @@ Créateur des films du catalogue **NetStream**, identifié par son **nom** et **
 
 ---
 
-**Spectateur** : Utilisateur enregistré sur NetStream avec ses informations personnelles (nom, prénom, email) et un mot de passe, qui peut visionner les films du catalogue et créer ses listes de favoris (films et personnages).
+### 👤 **Spectateur**
+Utilisateur enregistré sur **NetStream** avec ses informations personnelles (**nom**, **prénom**, **email**) et un **mot de passe**, qui peut visionner les **films** du catalogue et créer ses listes de favoris (**films** et **personnages**).
+
+---
