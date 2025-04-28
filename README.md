@@ -19,9 +19,9 @@ Ce projet concerne la création de la base de données de **Netstream**, de sa c
 
 ---
 
-## Requêtes SQL
+## 🛠️ Requêtes SQL
 
-Les titres et dates de sortie des films du plus récent au plus ancien
+### 🎬 Les titres et dates de sortie des films du plus récent au plus ancien
 
 ```sql
 SELECT title, release_date from movies
@@ -29,7 +29,7 @@ ORDER BY release_date DESC;
 
 ```
 
-Les noms, prénoms et âges des acteurs/actrices de plus de 30 ans dans l'ordre alphabétique
+### 👩‍🎤 Les noms, prénoms et âges des acteurs/actrices de plus de 30 ans dans l'ordre alphabétique
 
 ```sql
 SELECT first_name_actor, last_name_actor, EXTRACT(YEAR FROM AGE(CURRENT_DATE, date_of_birth)) AS age from actors
@@ -37,7 +37,7 @@ SELECT first_name_actor, last_name_actor, EXTRACT(YEAR FROM AGE(CURRENT_DATE, da
 
 ```
 
-La liste des acteurs/actrices principaux pour un film donné
+### ⭐ La liste des acteurs/actrices principaux pour un film donné
 
 ```sql
 SELECT first_name_actor, last_name_actor from actors
@@ -48,7 +48,7 @@ SELECT first_name_actor, last_name_actor from actors
 WHERE title = 'Dune' and character_type = 'principal';
 ```
 
-La liste des films pour un acteur/actrice donné
+### 🎥 La liste des films pour un acteur/actrice donné
 
 ```sql
 SELECT title from movies
@@ -60,7 +60,7 @@ SELECT title from movies
 
 ```
 
-Ajouter un film
+### ➕ Ajouter un film
 
 ```sql
 INSERT INTO movies (title, length, release_date, director_id)
@@ -73,7 +73,7 @@ INSERT INTO movies (title, length, release_date, director_id)
  ON CONFLICT (title, length, release_date, director_id)
  DO NOTHING;
 ```
-Ajouter un acteur/actrice
+### ➕ Ajouter un acteur/actrice
 
 ```sql
 INSERT INTO actors (first_name_actor, last_name_actor, date_of_birth)
