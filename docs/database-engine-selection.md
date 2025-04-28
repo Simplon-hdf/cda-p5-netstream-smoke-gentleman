@@ -1,7 +1,9 @@
-# Choix du SGBDR pour le projet
+# ⚙️ Choix du SGBDR pour le projet
 
-## Introduction
-Le choix d'un Système de Gestion de Bases de Données Relationnelles (SGBDR) est une étape clé pour assurer la pérennité et les performances du projet. Ce document présente les critères de sélection et justifie le choix du SGBDR adapté à ce projet.
+---
+
+## 📝 Introduction
+Le choix d'un **Système de Gestion de Bases de Données Relationnelles (SGBDR)** est une étape clé pour assurer la **pérennité** et les **performances** du projet. Ce document présente les **critères de sélection** et justifie le choix du SGBDR adapté à ce projet.
 
 ---
 
