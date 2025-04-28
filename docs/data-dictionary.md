@@ -45,14 +45,16 @@
 
 ---
 
-## Spectateurs
+## 👤 Spectateurs
 
-| Attribut             | Type           | Description                        | Exemple                                                      |
-| -------------------- | -------------- | ---------------------------------- | ------------------------------------------------------------ |
-| spectator_id         | Alphanumérique | Identifiant unique du spectateur   | 4f9a2b18-7c7b-4c8a-bc90-9e0b1e2d4a5f                         |
-| first_name_spectator | Alphanumérique | Prénom du spectateur               | Tom                                                          |
-| last_name_spectator  | Alphanumérique | Nom du spectateur                  | Holland                                                      |
-| email                | Alphanumérique | Adresse e-mail du spectateur       | exemple@gmail.com                                            |
-| password             | Alphanumérique | Mot de passe chiffré du spectateur | $2b$12$uDdpIQzjSjiqFjz06cGKH.r5u3ScX38O3nOTxMWxZfNEvD9hD3ee6 |
+| **Attribut**           | **Type**       | **Description**                  | **Exemple**                          |
+| ---------------------- | -------------- | -------------------------------- | ------------------------------------ |
+| `spectator_id`         | Alphanumérique | Identifiant unique du spectateur | `4f9a2b18-7c7b-4c8a-bc90-9e0b1e2d4a5f` |
+| `first_name_spectator` | Alphanumérique | Prénom du spectateur             | `Tom`                                |
+| `last_name_spectator`  | Alphanumérique | Nom du spectateur                | `Holland`                            |
+| `email`                | Alphanumérique | Adresse e-mail du spectateur     | `exemple@gmail.com`                  |
+| `password`             | Alphanumérique | Mot de passe chiffré             | `$2b$12$uDdpIQzjSjiqFjz06cGKH.r5u3ScX38O3nOTxMWxZfNEvD9hD3ee6` |
+
+---
 
 
