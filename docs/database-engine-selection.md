@@ -99,7 +99,7 @@ Pour sélectionner le SGBDR idéal, plusieurs critères ont été évalués :
 
 ---
 
-## Justification du choix
+## ✅ Justification du choix
 **PostgreSQL** a été retenu comme le SGBDR principal pour ce projet pour les raisons suivantes :
 1. **Performances et évolutivité** : PostgreSQL est capable de gérer des charges croissantes ainsi que des requêtes complexes grâce à son moteur robuste.
 2. **Fiabilité** : Prise en charge complète des transactions ACID, essentielle pour assurer la cohérence et l'intégrité des données.
@@ -116,8 +116,9 @@ Pour sélectionner le SGBDR idéal, plusieurs critères ont été évalués :
 
 ---
 
-## Conclusion
-Le choix de PostgreSQL comme SGBDR pour ce projet repose sur sa capacité à répondre aux besoins actuels tout en offrant des perspectives de croissance. Il s'agit d'un choix stratégique qui garantit robustesse, flexibilité et performances pour accompagner l'évolution du projet. Les aspects sécurité ont été particulièrement pris en compte, PostgreSQL offrant le meilleur compromis entre protection des données, contrôle d'accès et conformité aux standards modernes de sécurité.
+## 📌 Conclusion
+Le choix de **PostgreSQL** comme SGBDR pour ce projet repose sur sa capacité à répondre aux besoins actuels tout en offrant des perspectives de croissance. Il s'agit d'un choix stratégique qui garantit robustesse, flexibilité et performances pour accompagner l'évolution du projet. Les aspects sécurité ont été particulièrement pris en compte, PostgreSQL offrant le meilleur compromis entre protection des données, contrôle d'accès et conformité aux standards modernes de sécurité.
+
 
 ---
 
