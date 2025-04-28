@@ -62,15 +62,19 @@ find "$BACKUP_DIR" -name "*.backup" -mtime +7 -exec rm {} \; >> "$LOG_FILE"
     ```
 ---
 
-## Cron
+## ⏰ Automatisation avec Cron
 
 Le script sera exécuté automatiquement tous les jours à 2h00 grâce à cron avec la ligne:
 
-> 0 2 * * * path/script.sh
+```bash
+0 2 * * * path/script.sh
+```
 
-## Restauration
+## 🔄 Restauration
 
 En cas de problème on peut restoré une ancienne sauvegarde avec
 
-> pg_restore -U User -d netstream path_to_backup
+```bash
+pg_restore -U User -d netstream path_to_backup
+```
 
