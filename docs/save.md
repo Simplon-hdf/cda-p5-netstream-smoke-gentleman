@@ -11,13 +11,13 @@ Les risques que notre base de données peut rencontrer sont multiples :
 
 Pour ces raisons, une **politique de rétention** va être mise en place.
 
-## Les mesures
+## 🛠️ Les mesures
 
 La base de données sera sauvegardée tous les jours à 2 heures du matin. Un fichier log indiquera le succès ou l’échec de ces sauvegardes. Chaque sauvegarde sera conservée pendant 7 jours, puis supprimée.
 
 La sauvegarde se fera grâce à un script qui sera exécuté tous les jours à 2h00.
 
-### Script de sauvegarde
+## 💾 Script de sauvegarde
 
 Voici le script de sauvegarde à exécuter automatiquement :
 
@@ -45,15 +45,22 @@ find "$BACKUP_DIR" -name "*.backup" -mtime +7 -exec rm {} \; >> "$LOG_FILE"
 
 ```
 
-Il faudra modifier les permissions du fichier pour qu'il soit exécutable.
+🔑 Configuration des permissions
+- Modifiez les permissions du fichier pour qu'il soit exécutable :
+  ```bash 
+  chmod +x path/script.sh
+  ```
+- Le mot de passe de l'utilisateur sera conservé dans le fichier .pgpass :
 
-Le mot de passe de l'utilisateur sera conservé dans le fichier .pgpass
+    ```bash 
+    nano .pgpass
+    ```
+- Ajoutez la ligne en remplaçant les informations
 
->nano .pgpass
-
-Ajoutez la ligne en remplaçant les informations
-
->hostname:port:database:username:password
+    ```
+    hostname:port:database:username:password
+    ```
+---
 
 ## Cron
 
