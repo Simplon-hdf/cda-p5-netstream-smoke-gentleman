@@ -107,9 +107,9 @@ SELECT * from actors
 ```
 ---
 
-## Requêtes avancées
+## 🚀 Requêtes avancées
 
-Fonction pour lister les films selon les réalisateurs :
+### 🎞️ Fonction pour lister les films selon les réalisateurs :
 
 ```sql
 CREATE OR REPLACE FUNCTION listFilmsRealisateur(
@@ -130,7 +130,7 @@ CREATE OR REPLACE FUNCTION listFilmsRealisateur(
  $$;
 
 ```
-Opérations CRUD pour ajouter un acteur au sein d'un film avec des procédures stockées :
+### 🎭 Opérations CRUD pour ajouter un acteur au sein d'un film avec des procédures stockées :
 
 ```sql
 -- Procédure pour ajouter un nouvel acteur à un film
