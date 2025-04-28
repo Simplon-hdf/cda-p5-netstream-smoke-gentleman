@@ -11,8 +11,14 @@ Personne physique référencée dans le catalogue **NetStream**, identifiée par
 
 ---
 
-**Personnage** : Personne fictive apparaissant dans les films de NetStream, identifiée par son nom, pouvant être catégorisée comme principal ou secondaire, et pouvant être incarnée par différents acteurs.
+### 🦸 **Personnage**
+Personne fictive apparaissant dans les films de **NetStream**, identifiée par son **nom**, pouvant être catégorisée comme **principal** ou **secondaire**, et pouvant être incarnée par différents **acteurs**.
 
-**Réalisateur** : Créateur des films du catalogue NetStream, identifié par son nom et prénom, responsable de la direction d'au moins un film disponible sur la plateforme.
+---
+
+### 🎥 **Réalisateur**
+Créateur des films du catalogue **NetStream**, identifié par son **nom** et **prénom**, responsable de la direction d'au moins un **film** disponible sur la plateforme.
+
+---
 
 **Spectateur** : Utilisateur enregistré sur NetStream avec ses informations personnelles (nom, prénom, email) et un mot de passe, qui peut visionner les films du catalogue et créer ses listes de favoris (films et personnages).
