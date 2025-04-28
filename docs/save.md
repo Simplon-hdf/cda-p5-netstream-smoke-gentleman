@@ -2,7 +2,7 @@
 
 Cette page indique les mesures prises pour assurer la **sécurité des données** en cas d'incidents.
 
-## Les risques
+## ⚠️ Les risques
 
 Les risques que notre base de données peut rencontrer sont multiples :
 - Une mauvaise manipulation des données (suppression accidentelle de la base de données, erreur dans une requête).
