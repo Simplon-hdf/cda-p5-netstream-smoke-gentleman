@@ -1,6 +1,10 @@
-# Lexique métier
+# 📖 Lexique métier
 
-**Film** : Œuvre audiovisuelle proposée sur la plateforme NetStream, identifiée par un titre unique, caractérisée par sa durée et sa date de sortie, et obligatoirement associée à un réalisateur et au moins un acteur.
+### 🎬 **Film**
+Œuvre audiovisuelle proposée sur la plateforme **NetStream**, identifiée par un **titre unique**, caractérisée par sa **durée** et sa **date de sortie**, et obligatoirement associée à un **réalisateur** et au moins un **acteur**.
+
+---
+
 
 **Acteur/Actrice** : Personne physique référencée dans le catalogue NetStream, identifiée par son nom, prénom et date de naissance, qui interprète au moins un personnage dans un ou plusieurs films disponibles.
 
