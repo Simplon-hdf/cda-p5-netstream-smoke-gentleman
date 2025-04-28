@@ -28,10 +28,12 @@
 
 ---
 
-## Les réalisateurs
-- RG15 : Un réalisateur doit avoir un nom
-- RG16 : Un réalisateur doit avoir un prénom
-- RG17 : Un réalisateur doit avoir un ou plusieurs films
+## 🎥 Les réalisateurs
+- **RG15** : Un réalisateur doit avoir un **nom**.
+- **RG16** : Un réalisateur doit avoir un **prénom**.
+- **RG17** : Un réalisateur doit avoir un ou plusieurs **films**.
+
+---
 
 ## Les spectateurs
 - RG18 : Un spectateur doit avoir nom
