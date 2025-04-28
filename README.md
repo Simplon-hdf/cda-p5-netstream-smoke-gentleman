@@ -4,20 +4,20 @@ Ce projet concerne la création de la base de données de **Netstream**, de sa c
 
 ---
 
-##  Sommaire
+## 📋 Sommaire
 
-- [Règles de gestion](.docs/business-rules.md)
-- [Lexique](.docs/data-glossary.md)
-- [Dictionnaire de données](.docs/data-dictionary.md)
-- [MCD](.docs/MCD.png)
-- [MLD](.docs/MLD.png)
-- [MPD](.docs/MPD.png)
-- [Choix du SGBDR](.docs/database-engine-selection.md)
-- [Politique de sauvegarde](.docs/save.md)
-- [Les requêtes SQL](#requêtes-SQL)
-- [Les requêtes avancées](#requêtes-avancées)
+- [📜 Règles de gestion](.docs/business-rules.md)
+- [📖 Lexique](.docs/data-glossary.md)
+- [📚 Dictionnaire de données](.docs/data-dictionary.md)
+- [🖼️ MCD](.docs/MCD.png)
+- [🖼️ MLD](.docs/MLD.png)
+- [🖼️ MPD](.docs/MPD.png)
+- [⚙️ Choix du SGBDR](.docs/database-engine-selection.md)
+- [💾 Politique de sauvegarde](.docs/save.md)
+- [🛠️ Les requêtes SQL](#requêtes-SQL)
+- [🚀 Les requêtes avancées](#requêtes-avancées)
 
-
+---
 
 ## Requêtes SQL
 
