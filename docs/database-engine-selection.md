@@ -81,7 +81,7 @@ Pour sélectionner le SGBDR idéal, plusieurs critères ont été évalués :
     - Vulnérable aux corruptions en cas d'accès concurrent
 ---
 
-### 4. MongoDB (NoSQL pour comparaison)
+### 4️⃣ **MongoDB (NoSQL pour comparaison)**
 - **Avantages :**
   - Flexible pour des données non relationnelles.
   - Bonne gestion des données semi-structurées (JSON).
