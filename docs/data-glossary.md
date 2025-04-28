@@ -6,7 +6,10 @@
 ---
 
 
-**Acteur/Actrice** : Personne physique référencée dans le catalogue NetStream, identifiée par son nom, prénom et date de naissance, qui interprète au moins un personnage dans un ou plusieurs films disponibles.
+### 🎭 **Acteur/Actrice**
+Personne physique référencée dans le catalogue **NetStream**, identifiée par son **nom**, **prénom** et **date de naissance**, qui interprète au moins un **personnage** dans un ou plusieurs **films** disponibles.
+
+---
 
 **Personnage** : Personne fictive apparaissant dans les films de NetStream, identifiée par son nom, pouvant être catégorisée comme principal ou secondaire, et pouvant être incarnée par différents acteurs.
 
