@@ -5,11 +5,11 @@ Cette page indique les mesures prises pour assurer la **sécurité des données*
 ## ⚠️ Les risques
 
 Les risques que notre base de données peut rencontrer sont multiples :
-- Une mauvaise manipulation des données (suppression accidentelle de la base de données, erreur dans une requête).
-- Problème technique (corruption ou panne matérielle).
-- Acte criminel (base de données volée et bloquée avec un ransomware).
+- **Une mauvaise manipulation des données** (suppression accidentelle de la base de données, erreur dans une requête).
+- **Problème technique** (corruption ou panne matérielle).
+- **Acte criminel** (base de données volée et bloquée avec un ransomware).
 
-Pour ces raisons, une politique de rétention va être mise en place.
+Pour ces raisons, une **politique de rétention** va être mise en place.
 
 ## Les mesures
 
