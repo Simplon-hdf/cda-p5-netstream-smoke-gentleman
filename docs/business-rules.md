@@ -10,11 +10,14 @@
 - **RG5** : Un film doit avoir une **date de sortie**.
 
 ---
-## Les acteurs, actrices
-- RG6 : Un acteur doit avoir un nom
-- RG7 : Un acteur doit avoir un prénom
-- RG8 : Un acteur doit avoir un ou plusieurs rôles
-- RG9 : Un acteur doit avoir une date de naissance
+
+## 🎭 Les acteurs et actrices
+- **RG6** : Un acteur doit avoir un **nom**.
+- **RG7** : Un acteur doit avoir un **prénom**.
+- **RG8** : Un acteur doit avoir un ou plusieurs **rôles**.
+- **RG9** : Un acteur doit avoir une **date de naissance**.
+
+---
 
 ## Les personnages
 - RG10 : Un personnage doit avoir un nom
