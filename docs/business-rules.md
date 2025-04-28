@@ -19,13 +19,14 @@
 
 ---
 
-## Les personnages
-- RG10 : Un personnage doit avoir un nom
-- RG11 : Un personnage peut être un personnage principal ou secondaire
-- RG12 : Un personnage peut avoir un ou plusieurs acteurs
-- RG13 : Un personnage peut appartenir à un ou plusieurs films
-- RG14 : Un personnage peut être le personnage préféré d'un ou plusieurs spectateurs
+## 🦸 Les personnages
+- **RG10** : Un personnage doit avoir un **nom**.
+- **RG11** : Un personnage peut être un **personnage principal** ou **secondaire**.
+- **RG12** : Un personnage peut avoir un ou plusieurs **acteurs**.
+- **RG13** : Un personnage peut appartenir à un ou plusieurs **films**.
+- **RG14** : Un personnage peut être le **personnage préféré** d'un ou plusieurs **spectateurs**.
 
+---
 
 ## Les réalisateurs
 - RG15 : Un réalisateur doit avoir un nom
