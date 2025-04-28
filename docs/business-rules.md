@@ -1,12 +1,15 @@
-# Règles de gestion
+# 📜 Règles de gestion
 
-## Les films
-- RG1 : Un film doit avoir un titre
-- RG2 : Un film doit avoir un ou plusieurs acteurs
-- RG3 : Un film doit avoir un réalisateur
-- RG4 : Un film doit avoir une durée
-- RG5 : Un film doit avoir une date de sortie
+---
 
+## 🎬 Les films
+- **RG1** : Un film doit avoir un **titre**.
+- **RG2** : Un film doit avoir un ou plusieurs **acteurs**.
+- **RG3** : Un film doit avoir un **réalisateur**.
+- **RG4** : Un film doit avoir une **durée**.
+- **RG5** : Un film doit avoir une **date de sortie**.
+
+---
 ## Les acteurs, actrices
 - RG6 : Un acteur doit avoir un nom
 - RG7 : Un acteur doit avoir un prénom
