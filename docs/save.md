@@ -1,6 +1,6 @@
-# Politique de rétention
+# 🛡️ Politique de rétention
 
-Cette page indique les mesures prises pour assurer la sécurité des données en cas d'incidents.
+Cette page indique les mesures prises pour assurer la **sécurité des données** en cas d'incidents.
 
 ## Les risques
 
