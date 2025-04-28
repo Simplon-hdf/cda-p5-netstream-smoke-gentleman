@@ -35,13 +35,15 @@
 
 ---
 
-## Réalisateurs
+## 🎥 Réalisateurs
 
-| Attribut            | Type           | Description                       | Exemple                              |
-| ------------------- | -------------- | --------------------------------- | ------------------------------------ |
-| director_id         | Alphanumérique | Identifiant unique du réalisateur | 4f9a2b18-7c7b-4c8a-bc90-9e0b1e2d4a5f |
-| first_name_director | Alphanumérique | Prénom du réalisateur             | Tom                                  |
-| last_name_director  | Alphanumérique | Nom du réalisateur                | Holland                              |
+| **Attribut**          | **Type**       | **Description**                  | **Exemple**                          |
+| --------------------- | -------------- | -------------------------------- | ------------------------------------ |
+| `director_id`         | Alphanumérique | Identifiant unique du réalisateur | `4f9a2b18-7c7b-4c8a-bc90-9e0b1e2d4a5f` |
+| `first_name_director` | Alphanumérique | Prénom du réalisateur            | `Tom`                                |
+| `last_name_director`  | Alphanumérique | Nom du réalisateur               | `Holland`                            |
+
+---
 
 ## Spectateurs
 
