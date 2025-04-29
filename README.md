@@ -76,7 +76,7 @@ INSERT INTO movies (title, length, release_date, director_id)
 
 ```sql
 INSERT INTO actors (first_name_actor, last_name_actor, date_of_birth)
-VALUES ('Leonardo', 'DiCaprio', '1974-11-11')
+VALUES ('Jim', 'Carrey', '1962-01-17')
 ON CONFLICT (first_name_actor, last_name_actor, date_of_birth)
 DO NOTHING;
 ```
@@ -122,7 +122,7 @@ CREATE OR REPLACE FUNCTION listFilmsRealisateur(
      RETURN QUERY
      SELECT m.title, m.release_date
      FROM movies m
-     INNER JOIN directors d ON m.director_id = director.id
+     INNER JOIN directors d ON m.director_id = d.director.id
      WHERE d.first_name_director = inputFirstName
         OR d.last_name_director = inputLastName;
  END;
