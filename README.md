@@ -219,7 +219,7 @@ BEGIN
         last_name_actor = newLastName,
         date_of_birth = newDOB,
         updated_at = NOW()
-    WHERE id = actorId;
+    WHERE actor_id = actorId;
 
     IF NOT FOUND THEN
         RAISE EXCEPTION 'L''acteur avec l''ID % n''existe pas.', actorId;
