@@ -40,12 +40,13 @@ SELECT first_name_actor, last_name_actor, EXTRACT(YEAR FROM AGE(CURRENT_DATE, da
 ### ⭐ La liste des acteurs/actrices principaux pour un film donné
 
 ```sql
-SELECT first_name_actor, last_name_actor from actors
-    INNER JOIN character_actors ON character_actors.actor_id = actors.id
-        INNER JOIN characters ON characters.id = character_actors.character_id
-            INNER JOIN movies_characters ON movies_characters.character_id = characters.id
-                INNER JOIN movies ON movies.id = movies_characters.movie_id
-WHERE title = 'Dune' and character_type = 'principal';
+SELECT first_name_actor, last_name_actor FROM actors
+    INNER JOIN movies_actors ON actors.actor_id = movies_actors.actor_id 
+    INNER JOIN character_actors ON character_actors.actor_id = actors.actor_id 
+            INNER JOIN characters ON characters.character_id = character_actors.character_id
+                INNER JOIN movies_characters ON movies_characters.character_id = characters.id
+                    INNER JOIN movies ON movies.movie_id = movies_characters.movie_id
+WHERE title = 'Dune' AND character_type = 'principal' AND movies_actors.movie_id = movies.movie_id;
 ```
 
 ### 🎥 La liste des films pour un acteur/actrice donné
