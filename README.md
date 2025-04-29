@@ -53,8 +53,8 @@ SELECT first_name_actor, last_name_actor FROM actors
 
 ```sql
 SELECT title from movies
-    INNER JOIN movies_actors ON movies.movie_id = movies_actors.movies_id
-        INNER JOIN actors ON actors.actors_id = movies_actors.actors_id
+    INNER JOIN movies_actors ON movies.movie_id = movies_actors.movie_id
+        INNER JOIN actors ON actors.actor_id = movies_actors.actor_id
 WHERE first_name_actor = 'Robert' and last_name_actor = 'De Niro';
 
 ```
