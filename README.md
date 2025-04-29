@@ -149,7 +149,7 @@ CREATE OR REPLACE PROCEDURE add_actor_to_movie(
      characterId UUID;
  BEGIN
      -- Vérifier si l'acteur existe déjà
-     SELECT id INTO actorId
+     SELECT actor_id INTO actorId
      FROM actors
      WHERE first_name_actor = actorFirstName AND last_name_actor = actorLastName AND date_of_birth = actorDOB;
  
@@ -157,11 +157,11 @@ CREATE OR REPLACE PROCEDURE add_actor_to_movie(
      IF actorId IS NULL THEN
          INSERT INTO actors (first_name_actor, last_name_actor, date_of_birth)
          VALUES (actorFirstName, actorLastName, actorDOB)
-         RETURNING id INTO actorId;
+         RETURNING actor_id INTO actorId;
      END IF;
  
      -- Récupérer l'ID du film avec le titre, la date de sortie et la durée pour le différencier
-     SELECT id INTO movieId
+     SELECT movie_id INTO movieId
      FROM movies
      WHERE title = movieTitle
        AND release_date = movieReleaseDate
@@ -172,25 +172,9 @@ CREATE OR REPLACE PROCEDURE add_actor_to_movie(
          RAISE EXCEPTION 'Le film % avec la date % et la durée % n''existe pas.', movieTitle, movieReleaseDate, movieLength;
      END IF;
  
-     -- Vérifier si un personnage générique existe déjà
-     SELECT id INTO characterId
-     FROM characters
-     WHERE name_character = 'Generic Character';
- 
-     -- Si le personnage générique n'existe pas, le créer
-     IF characterId IS NULL THEN
-         INSERT INTO characters (name_character)
-         VALUES ('Generic Character')
-         RETURNING id INTO characterId;
-     END IF;
- 
-     -- Ajouter l'acteur au film (via le personnage générique)
-     INSERT INTO movies_characters (movie_id, character_id, character_type)
-     VALUES (movieId, characterId, 'Generic Character');
- 
      -- Ajouter l'association entre l'acteur et le personnage générique
-     INSERT INTO character_actors (actor_id, character_id)
-     VALUES (actorId, characterId);
+     INSERT INTO movies_actors (actor_id, movie_id)
+     VALUES (actorId, movieId);
  
 END;
 $$;
