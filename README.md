@@ -1,25 +1,27 @@
-# cda-p5-netstream-smoke-gentleman
+# 📽️ cda-p5-netstream-smoke-gentleman
 
-Ce projet concerne la création de la base de données de Netstream, de sa conception à sa mise en place.
+Ce projet concerne la création de la base de données de **Netstream**, de sa conception à sa mise en place.
 
-##  Sommaire
+---
 
-- [Règles de gestion](.docs/business-rules.md)
-- [Lexique](.docs/data-glossary.md)
-- [Dictionnaire de données](.docs/data-dictionary.md)
-- [MCD](.docs/MCD.png)
-- [MLD](.docs/MLD.png)
-- [MPD](.docs/MPD.png)
-- [Choix du SGBDR](.docs/database-engine-selection.md)
-- [Politique de sauvegarde](.docs/save.md)
-- [Les requêtes SQL](#requêtes-SQL)
-- [Les requêtes avancées](#requêtes-avancées)
+## 📋 Sommaire
 
+- [📜 Règles de gestion](.docs/business-rules.md)
+- [📖 Lexique](.docs/data-glossary.md)
+- [📚 Dictionnaire de données](.docs/data-dictionary.md)
+- [🖼️ MCD](.docs/MCD.png)
+- [🖼️ MLD](.docs/MLD.png)
+- [🖼️ MPD](.docs/MPD.png)
+- [⚙️ Choix du SGBDR](.docs/database-engine-selection.md)
+- [💾 Politique de sauvegarde](.docs/save.md)
+- [🛠️ Les requêtes SQL](#requêtes-SQL)
+- [🚀 Les requêtes avancées](#requêtes-avancées)
 
+---
 
-## Requêtes SQL
+## 🛠️ Requêtes SQL
 
-Les titres et dates de sortie des films du plus récent au plus ancien
+### 🎬 Les titres et dates de sortie des films du plus récent au plus ancien
 
 ```sql
 SELECT title, release_date from movies
@@ -27,7 +29,7 @@ ORDER BY release_date DESC;
 
 ```
 
-Les noms, prénoms et âges des acteurs/actrices de plus de 30 ans dans l'ordre alphabétique
+### 👩‍🎤 Les noms, prénoms et âges des acteurs/actrices de plus de 30 ans dans l'ordre alphabétique
 
 ```sql
 SELECT first_name_actor, last_name_actor, EXTRACT(YEAR FROM AGE(CURRENT_DATE, date_of_birth)) AS age from actors
@@ -35,7 +37,7 @@ SELECT first_name_actor, last_name_actor, EXTRACT(YEAR FROM AGE(CURRENT_DATE, da
 
 ```
 
-La liste des acteurs/actrices principaux pour un film donné
+### ⭐ La liste des acteurs/actrices principaux pour un film donné
 
 ```sql
 SELECT first_name_actor, last_name_actor from actors
@@ -46,7 +48,7 @@ SELECT first_name_actor, last_name_actor from actors
 WHERE title = 'Dune' and character_type = 'principal';
 ```
 
-La liste des films pour un acteur/actrice donné
+### 🎥 La liste des films pour un acteur/actrice donné
 
 ```sql
 SELECT title from movies
@@ -58,7 +60,7 @@ SELECT title from movies
 
 ```
 
-Ajouter un film
+### ➕ Ajouter un film
 
 ```sql
 INSERT INTO movies (title, length, release_date, director_id)
@@ -71,7 +73,7 @@ INSERT INTO movies (title, length, release_date, director_id)
  ON CONFLICT (title, length, release_date, director_id)
  DO NOTHING;
 ```
-Ajouter un acteur/actrice
+### ➕ Ajouter un acteur/actrice
 
 ```sql
 INSERT INTO actors (first_name_actor, last_name_actor, date_of_birth)
@@ -80,7 +82,7 @@ ON CONFLICT (first_name_actor, last_name_actor, date_of_birth)
 DO NOTHING;
 ```
 
-Modifier un film
+### ✏️ Modifier un film
 
 ```sql
 UPDATE movies
@@ -88,7 +90,7 @@ UPDATE movies
   WHERE title = 'Inception' AND length = 148 AND release_date = '2010-07-16';
 ```
 
-Supprimer un acteur/actrice
+### ❌ Supprimer un acteur/actrice
 
 ```sql
 DELETE FROM actors
@@ -96,17 +98,18 @@ WHERE first_name_actor = 'Leonardo'
   AND last_name_actor = 'DiCaprio'
   AND date_of_birth = '1974-11-11';
 ```
-Afficher les 3 derniers acteurs/actrices ajouté(e)s
+### 🕒 Afficher les 3 derniers acteurs/actrices ajouté(e)s
 
 ```sql
 SELECT * from actors
  ORDER BY created_at DESC
  LIMIT 3;
 ```
+---
 
-## Requêtes avancées
+## 🚀 Requêtes avancées
 
-Fonction pour lister les films selon les réalisateurs :
+### 🎞️ Fonction pour lister les films selon les réalisateurs :
 
 ```sql
 CREATE OR REPLACE FUNCTION listFilmsRealisateur(
@@ -127,7 +130,7 @@ CREATE OR REPLACE FUNCTION listFilmsRealisateur(
  $$;
 
 ```
-Opérations CRUD pour ajouter un acteur au sein d'un film avec des procédures stockées :
+### 🎭 Opérations CRUD pour ajouter un acteur au sein d'un film avec des procédures stockées :
 
 ```sql
 -- Procédure pour ajouter un nouvel acteur à un film

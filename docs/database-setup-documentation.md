@@ -90,7 +90,7 @@ SELECT count(*) FROM movies;
 \q
 ```
 
-## Ressources additionnelles
+## 📚 Ressources additionnelles
 
 - [Documentation officielle PostgreSQL](https://www.postgresql.org/docs/)
 - [Guide des bonnes pratiques PostgreSQL](https://wiki.postgresql.org/wiki/Main_Page)
