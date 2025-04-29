@@ -194,9 +194,8 @@ CREATE OR REPLACE FUNCTION get_actors_by_movie(
      RETURN QUERY
      SELECT a.first_name_actor, a.last_name_actor, a.date_of_birth
      FROM actors a
-     INNER JOIN character_actors ca ON a.id = ca.actor_id
-     INNER JOIN movies_characters mc ON ca.character_id = mc.character_id
-     INNER JOIN movies m ON mc.movie_id = m.id
+     INNER JOIN movies_actors ma ON a.actor_id = ma.actor_id
+        INNER JOIN movies m ON ma.movie_id = m.movie_id
      WHERE m.title = movieTitle
        AND m.length = movieLength
        AND m.release_date = movieReleaseDate;
