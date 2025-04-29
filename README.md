@@ -229,39 +229,37 @@ $$;
 
 -- Procédure pour supprimer un acteur d'un film
 CREATE OR REPLACE PROCEDURE delete_actor_from_movie(
-    actorId UUID,
-    movieTitle VARCHAR,
-    movieLength INT,
-    movieReleaseDate DATE
-)
-LANGUAGE plpgsql
-AS $$
-DECLARE
-    movieId UUID;
-BEGIN
-    -- Récupérer l'ID du film
-    SELECT movie_id INTO movieId
-    FROM movies
-    WHERE title = movieTitle
-    AND release_date = movieReleaseDate
-    AND length = movieLength;
+     actorId UUID,
+     movieTitle VARCHAR,
+     movieLength INT,
+     movieReleaseDate DATE
+ )
+ LANGUAGE plpgsql
+ AS $$
+ DECLARE
+     movieId UUID;
+ BEGIN
+     -- Récupérer l'ID du film
+     SELECT movie_id INTO movieId
+     FROM movies
+     WHERE title = movieTitle
+     AND release_date = movieReleaseDate
+     AND length = movieLength;
+  
  
+     -- Vérifier si le film existe
+     IF movieId IS NULL THEN
+         RAISE EXCEPTION 'Le film % n''existe pas.', movieTitle;
+     END IF;
+ 
+     -- Supprimer l'association entre l'acteur et le film
+     DELETE FROM movies_actors
+     WHERE movie_id = movieId
+     AND actor_id = actorId;
+  
+ END;
+ $$;
 
-    -- Vérifier si le film existe
-    IF movieId IS NULL THEN
-        RAISE EXCEPTION 'Le film % n''existe pas.', movieTitle;
-    END IF;
-
-    -- Supprimer l'association entre l'acteur et le film
-    DELETE FROM movies_actors
-    WHERE movie_id = movieId
-    AND actors_id IN (
-        SELECT actors_id
-        FROM movie_actors
-        WHERE actor_id = actorId
-    );
-END;
-$$;
 
 -- Cette fonction permet de conserver un historique des modifications apportées aux utilisateurs
 
