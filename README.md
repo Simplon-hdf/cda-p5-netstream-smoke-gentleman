@@ -55,7 +55,7 @@ SELECT first_name_actor, last_name_actor FROM actors
 SELECT title from movies
     INNER JOIN movies_actors ON movies.movie_id = movies_actors.movie_id
         INNER JOIN actors ON actors.actor_id = movies_actors.actor_id
-WHERE first_name_actor = 'Robert' and last_name_actor = 'De Niro';
+WHERE first_name_actor = 'Andrew' and last_name_actor = 'Garfield';
 
 ```
 
@@ -64,10 +64,10 @@ WHERE first_name_actor = 'Robert' and last_name_actor = 'De Niro';
 ```sql
 INSERT INTO movies (title, length, release_date, director_id)
  VALUES (
-   'Inception',
-   150,
-   '2010-07-16',
-   (SELECT id FROM directors WHERE last_name_director = 'Nolan')
+   'Spider-Man: Homecoming',
+   133,
+   '2017-07-07',
+   (SELECT director_id FROM directors WHERE last_name_director = 'Scott')
  )
  ON CONFLICT (title, length, release_date, director_id)
  DO NOTHING;
