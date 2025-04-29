@@ -230,7 +230,9 @@ $$;
 -- Procédure pour supprimer un acteur d'un film
 CREATE OR REPLACE PROCEDURE delete_actor_from_movie(
     actorId UUID,
-    movieTitle VARCHAR
+    movieTitle VARCHAR,
+    movieLength INT,
+    movieReleaseDate DATE
 )
 LANGUAGE plpgsql
 AS $$
@@ -238,9 +240,12 @@ DECLARE
     movieId UUID;
 BEGIN
     -- Récupérer l'ID du film
-    SELECT id INTO movieId
+    SELECT movie_id INTO movieId
     FROM movies
-    WHERE title = movieTitle;
+    WHERE title = movieTitle
+    AND release_date = movieReleaseDate
+    AND length = movieLength;
+ 
 
     -- Vérifier si le film existe
     IF movieId IS NULL THEN
@@ -248,11 +253,11 @@ BEGIN
     END IF;
 
     -- Supprimer l'association entre l'acteur et le film
-    DELETE FROM movies_characters
+    DELETE FROM movies_actors
     WHERE movie_id = movieId
-    AND character_id IN (
-        SELECT character_id
-        FROM character_actors
+    AND actors_id IN (
+        SELECT actors_id
+        FROM movie_actors
         WHERE actor_id = actorId
     );
 
