@@ -260,15 +260,6 @@ BEGIN
         FROM movie_actors
         WHERE actor_id = actorId
     );
-
-    -- Supprimer l'acteur si plus aucune association n'existe
-    DELETE FROM actors
-    WHERE id = actorId
-    AND NOT EXISTS (
-        SELECT 1
-        FROM character_actors
-        WHERE actor_id = actorId
-    );
 END;
 $$;
 
