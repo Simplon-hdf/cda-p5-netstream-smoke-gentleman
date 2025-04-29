@@ -66,6 +66,13 @@ find "$BACKUP_DIR" -name "*.backup" -mtime +7 -exec rm {} \; >> "$LOG_FILE"
 
 Le script sera exécuté automatiquement tous les jours à 2h00 grâce à cron avec la ligne:
 
+- Ouvrir le fichier cron
+
+```bash
+crontab -e
+```
+- Ajoutez la ligne
+
 ```bash
 0 2 * * * path/script.sh
 ```
