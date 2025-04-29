@@ -53,11 +53,9 @@ WHERE title = 'Dune' AND character_type = 'principal' AND movies_actors.movie_id
 
 ```sql
 SELECT title from movies
-    INNER JOIN movies_characters ON movies_characters.movie_id = movies.id
-        INNER JOIN characters ON characters.id = movies_characters.character_id
-            INNER JOIN character_actors ON character_actors.character_id = characters.id
-                INNER JOIN actors ON actors.id = character_actors.actor_id
-                    WHERE first_name_actor = 'Robert' and last_name_actor = 'De Niro';
+    INNER JOIN movies_actors ON movies.movie_id = movies_actors.movies_id
+        INNER JOIN actors ON actors.actors_id = movies_actors.actors_id
+WHERE first_name_actor = 'Robert' and last_name_actor = 'De Niro';
 
 ```
 
