@@ -40,23 +40,22 @@ SELECT first_name_actor, last_name_actor, EXTRACT(YEAR FROM AGE(CURRENT_DATE, da
 ### ⭐ La liste des acteurs/actrices principaux pour un film donné
 
 ```sql
-SELECT first_name_actor, last_name_actor from actors
-    INNER JOIN character_actors ON character_actors.actor_id = actors.id
-        INNER JOIN characters ON characters.id = character_actors.character_id
-            INNER JOIN movies_characters ON movies_characters.character_id = characters.id
-                INNER JOIN movies ON movies.id = movies_characters.movie_id
-WHERE title = 'Dune' and character_type = 'principal';
+SELECT first_name_actor, last_name_actor FROM actors
+     INNER JOIN movies_actors ON actors.actor_id = movies_actors.actor_id 
+     INNER JOIN character_actors ON character_actors.actor_id = actors.actor_id 
+             INNER JOIN characters ON characters.character_id = character_actors.character_id
+                 INNER JOIN movies_characters ON movies_characters.character_id = characters.character_id
+                     INNER JOIN movies ON movies.movie_id = movies_characters.movie_id
+ WHERE title = 'Psycho' AND character_type = 'principal' AND movies_actors.movie_id = movies.movie_id;
 ```
 
 ### 🎥 La liste des films pour un acteur/actrice donné
 
 ```sql
 SELECT title from movies
-    INNER JOIN movies_characters ON movies_characters.movie_id = movies.id
-        INNER JOIN characters ON characters.id = movies_characters.character_id
-            INNER JOIN character_actors ON character_actors.character_id = characters.id
-                INNER JOIN actors ON actors.id = character_actors.actor_id
-                    WHERE first_name_actor = 'Robert' and last_name_actor = 'De Niro';
+    INNER JOIN movies_actors ON movies.movie_id = movies_actors.movie_id
+        INNER JOIN actors ON actors.actor_id = movies_actors.actor_id
+WHERE first_name_actor = 'Andrew' and last_name_actor = 'Garfield';
 
 ```
 
@@ -65,10 +64,10 @@ SELECT title from movies
 ```sql
 INSERT INTO movies (title, length, release_date, director_id)
  VALUES (
-   'Inception',
-   150,
-   '2010-07-16',
-   (SELECT id FROM directors WHERE last_name_director = 'Nolan')
+   'Spider-Man: Homecoming',
+   133,
+   '2017-07-07',
+   (SELECT director_id FROM directors WHERE last_name_director = 'Scott')
  )
  ON CONFLICT (title, length, release_date, director_id)
  DO NOTHING;
@@ -77,7 +76,7 @@ INSERT INTO movies (title, length, release_date, director_id)
 
 ```sql
 INSERT INTO actors (first_name_actor, last_name_actor, date_of_birth)
-VALUES ('Leonardo', 'DiCaprio', '1974-11-11')
+VALUES ('Jim', 'Carrey', '1962-01-17')
 ON CONFLICT (first_name_actor, last_name_actor, date_of_birth)
 DO NOTHING;
 ```
@@ -123,7 +122,7 @@ CREATE OR REPLACE FUNCTION listFilmsRealisateur(
      RETURN QUERY
      SELECT m.title, m.release_date
      FROM movies m
-     INNER JOIN directors d ON m.director_id = d.id
+     INNER JOIN directors d ON m.director_id = d.director.id
      WHERE d.first_name_director = inputFirstName
         OR d.last_name_director = inputLastName;
  END;
@@ -150,7 +149,7 @@ CREATE OR REPLACE PROCEDURE add_actor_to_movie(
      characterId UUID;
  BEGIN
      -- Vérifier si l'acteur existe déjà
-     SELECT id INTO actorId
+     SELECT actor_id INTO actorId
      FROM actors
      WHERE first_name_actor = actorFirstName AND last_name_actor = actorLastName AND date_of_birth = actorDOB;
  
@@ -158,11 +157,11 @@ CREATE OR REPLACE PROCEDURE add_actor_to_movie(
      IF actorId IS NULL THEN
          INSERT INTO actors (first_name_actor, last_name_actor, date_of_birth)
          VALUES (actorFirstName, actorLastName, actorDOB)
-         RETURNING id INTO actorId;
+         RETURNING actor_id INTO actorId;
      END IF;
  
      -- Récupérer l'ID du film avec le titre, la date de sortie et la durée pour le différencier
-     SELECT id INTO movieId
+     SELECT movie_id INTO movieId
      FROM movies
      WHERE title = movieTitle
        AND release_date = movieReleaseDate
@@ -173,25 +172,9 @@ CREATE OR REPLACE PROCEDURE add_actor_to_movie(
          RAISE EXCEPTION 'Le film % avec la date % et la durée % n''existe pas.', movieTitle, movieReleaseDate, movieLength;
      END IF;
  
-     -- Vérifier si un personnage générique existe déjà
-     SELECT id INTO characterId
-     FROM characters
-     WHERE name_character = 'Generic Character';
- 
-     -- Si le personnage générique n'existe pas, le créer
-     IF characterId IS NULL THEN
-         INSERT INTO characters (name_character)
-         VALUES ('Generic Character')
-         RETURNING id INTO characterId;
-     END IF;
- 
-     -- Ajouter l'acteur au film (via le personnage générique)
-     INSERT INTO movies_characters (movie_id, character_id, character_type)
-     VALUES (movieId, characterId, 'Generic Character');
- 
      -- Ajouter l'association entre l'acteur et le personnage générique
-     INSERT INTO character_actors (actor_id, character_id)
-     VALUES (actorId, characterId);
+     INSERT INTO movies_actors (actor_id, movie_id)
+     VALUES (actorId, movieId);
  
 END;
 $$;
@@ -211,9 +194,8 @@ CREATE OR REPLACE FUNCTION get_actors_by_movie(
      RETURN QUERY
      SELECT a.first_name_actor, a.last_name_actor, a.date_of_birth
      FROM actors a
-     INNER JOIN character_actors ca ON a.id = ca.actor_id
-     INNER JOIN movies_characters mc ON ca.character_id = mc.character_id
-     INNER JOIN movies m ON mc.movie_id = m.id
+     INNER JOIN movies_actors ma ON a.actor_id = ma.actor_id
+        INNER JOIN movies m ON ma.movie_id = m.movie_id
      WHERE m.title = movieTitle
        AND m.length = movieLength
        AND m.release_date = movieReleaseDate;
@@ -237,7 +219,7 @@ BEGIN
         last_name_actor = newLastName,
         date_of_birth = newDOB,
         updated_at = NOW()
-    WHERE id = actorId;
+    WHERE actor_id = actorId;
 
     IF NOT FOUND THEN
         RAISE EXCEPTION 'L''acteur avec l''ID % n''existe pas.', actorId;
@@ -247,43 +229,37 @@ $$;
 
 -- Procédure pour supprimer un acteur d'un film
 CREATE OR REPLACE PROCEDURE delete_actor_from_movie(
-    actorId UUID,
-    movieTitle VARCHAR
-)
-LANGUAGE plpgsql
-AS $$
-DECLARE
-    movieId UUID;
-BEGIN
-    -- Récupérer l'ID du film
-    SELECT id INTO movieId
-    FROM movies
-    WHERE title = movieTitle;
+     actorId UUID,
+     movieTitle VARCHAR,
+     movieLength INT,
+     movieReleaseDate DATE
+ )
+ LANGUAGE plpgsql
+ AS $$
+ DECLARE
+     movieId UUID;
+ BEGIN
+     -- Récupérer l'ID du film
+     SELECT movie_id INTO movieId
+     FROM movies
+     WHERE title = movieTitle
+     AND release_date = movieReleaseDate
+     AND length = movieLength;
+  
+ 
+     -- Vérifier si le film existe
+     IF movieId IS NULL THEN
+         RAISE EXCEPTION 'Le film % n''existe pas.', movieTitle;
+     END IF;
+ 
+     -- Supprimer l'association entre l'acteur et le film
+     DELETE FROM movies_actors
+     WHERE movie_id = movieId
+     AND actor_id = actorId;
+  
+ END;
+ $$;
 
-    -- Vérifier si le film existe
-    IF movieId IS NULL THEN
-        RAISE EXCEPTION 'Le film % n''existe pas.', movieTitle;
-    END IF;
-
-    -- Supprimer l'association entre l'acteur et le film
-    DELETE FROM movies_characters
-    WHERE movie_id = movieId
-    AND character_id IN (
-        SELECT character_id
-        FROM character_actors
-        WHERE actor_id = actorId
-    );
-
-    -- Supprimer l'acteur si plus aucune association n'existe
-    DELETE FROM actors
-    WHERE id = actorId
-    AND NOT EXISTS (
-        SELECT 1
-        FROM character_actors
-        WHERE actor_id = actorId
-    );
-END;
-$$;
 
 -- Cette fonction permet de conserver un historique des modifications apportées aux utilisateurs
 
