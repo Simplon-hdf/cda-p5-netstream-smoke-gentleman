@@ -41,8 +41,8 @@ SELECT first_name_actor, last_name_actor, EXTRACT(YEAR FROM AGE(CURRENT_DATE, da
 
 ```sql
 SELECT first_name_actor, last_name_actor FROM actors
-     INNER JOIN movies_actors ON actors.actor_id = movies_actors.actor_id 
-     INNER JOIN character_actors ON character_actors.actor_id = actors.actor_id 
+     INNER JOIN movies_actors ON actors.actor_id = movies_actors.actor_id
+     INNER JOIN character_actors ON character_actors.actor_id = actors.actor_id
              INNER JOIN characters ON characters.character_id = character_actors.character_id
                  INNER JOIN movies_characters ON movies_characters.character_id = characters.character_id
                      INNER JOIN movies ON movies.movie_id = movies_characters.movie_id
@@ -152,30 +152,30 @@ CREATE OR REPLACE PROCEDURE add_actor_to_movie(
      SELECT actor_id INTO actorId
      FROM actors
      WHERE first_name_actor = actorFirstName AND last_name_actor = actorLastName AND date_of_birth = actorDOB;
- 
+
      -- Si l'acteur n'existe pas, le créer
      IF actorId IS NULL THEN
          INSERT INTO actors (first_name_actor, last_name_actor, date_of_birth)
          VALUES (actorFirstName, actorLastName, actorDOB)
          RETURNING actor_id INTO actorId;
      END IF;
- 
+
      -- Récupérer l'ID du film avec le titre, la date de sortie et la durée pour le différencier
      SELECT movie_id INTO movieId
      FROM movies
      WHERE title = movieTitle
        AND release_date = movieReleaseDate
        AND length = movieLength;
- 
+
      -- Vérifier si le film existe
      IF movieId IS NULL THEN
          RAISE EXCEPTION 'Le film % avec la date % et la durée % n''existe pas.', movieTitle, movieReleaseDate, movieLength;
      END IF;
- 
+
      -- Ajouter l'association entre l'acteur et le personnage générique
      INSERT INTO movies_actors (actor_id, movie_id)
      VALUES (actorId, movieId);
- 
+
 END;
 $$;
 
@@ -245,18 +245,18 @@ CREATE OR REPLACE PROCEDURE delete_actor_from_movie(
      WHERE title = movieTitle
      AND release_date = movieReleaseDate
      AND length = movieLength;
-  
- 
+
+
      -- Vérifier si le film existe
      IF movieId IS NULL THEN
          RAISE EXCEPTION 'Le film % n''existe pas.', movieTitle;
      END IF;
- 
+
      -- Supprimer l'association entre l'acteur et le film
      DELETE FROM movies_actors
      WHERE movie_id = movieId
      AND actor_id = actorId;
-  
+
  END;
  $$;
 
@@ -269,14 +269,14 @@ DECLARE
     old_row jsonb := to_jsonb(OLD);
     new_row jsonb := to_jsonb(NEW);
 BEGIN
-    INSERT INTO archives (id, archive_date, modified_field, old_value, new_value, spectator_id)
+    INSERT INTO archives (archive_id, archive_date, modified_field, old_value, new_value, spectator_id)
     SELECT
         gen_random_uuid(),
         NOW(),
         col.column_name,
         old_row ->> col.column_name,
         new_row ->> col.column_name,
-        NEW.id
+        NEW.spectator_id
     FROM information_schema.columns col
     WHERE col.table_name = 'spectators'
       AND old_row ->> col.column_name IS DISTINCT FROM new_row ->> col.column_name;
