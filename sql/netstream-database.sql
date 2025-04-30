@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS movies_characters(
 );
 
 -- Création de la table d'association entre acteurs et personnages
-CREATE TABLE IF NOT EXISTS character_actors(
+CREATE TABLE IF NOT EXISTS characters_actors(
     actor_id uuid NOT NULL,
     character_id uuid NOT NULL,
     created_at_character_actor TIMESTAMP DEFAULT NOW(),
