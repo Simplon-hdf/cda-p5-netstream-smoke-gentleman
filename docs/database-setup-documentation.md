@@ -32,7 +32,7 @@ brew services start postgresql
 3. Laissez le port par défaut (5432) sauf si vous avez des contraintes spécifiques
 4. Définissez un mot de passe pour l'utilisateur `postgres`
 
---- 
+---
 
 ## ⚙️ Configuration de la base de données NetStream
 
@@ -65,8 +65,11 @@ Après avoir créé la base de données, importez le schéma :
 # Naviguer vers le dossier du projet
 cd /chemin/vers/cda-p5-netstream-smoke-gentleman
 
-# Exécuter le script SQL pour créer la structure de la base de données
-psql -U netstream_user -d netstream -f sql/netstream_database.sql
+# Exécuter le script SQL pour créer la structure de la base de données (méthode recommandée)
+sudo -u postgres psql -d netstream -f sql/netstream-database.sql
+
+# Alternative avec l'utilisateur netstream_admin
+psql -U netstream_admin -d netstream -f sql/netstream-database.sql
 ```
 
 ### 3️⃣ Jeu de données de test
@@ -74,7 +77,11 @@ psql -U netstream_user -d netstream -f sql/netstream_database.sql
 Pour charger un jeu de données de test :
 
 ```bash
-psql -U netstream_user -d netstream -f sql/database-fixtures.sql
+# Méthode recommandée
+sudo -u postgres psql -d netstream -f sql/database-fixtures.sql
+
+# Alternative avec l'utilisateur netstream_admin
+psql -U netstream_admin -d netstream -f sql/database-fixtures.sql
 ```
 
 ## ✅ Vérification de l'installation
@@ -82,8 +89,11 @@ psql -U netstream_user -d netstream -f sql/database-fixtures.sql
 Pour vérifier que l'installation fonctionne correctement :
 
 ```bash
-# Se connecter à la base
-psql -U netstream_user -d netstream
+# Se connecter à la base (avec sudo -u postgres)
+sudo -u postgres psql -d netstream
+
+# Alternative : se connecter avec l'utilisateur netstream_admin
+psql -U netstream_admin -d netstream
 
 # Lister les tables
 \dt
