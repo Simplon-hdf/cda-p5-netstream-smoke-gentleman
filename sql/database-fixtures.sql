@@ -124,7 +124,7 @@ INSERT INTO actors (first_name_actor, last_name_actor, date_of_birth) VALUES
 -- ===============================================
 -- LIEN ENTRE LES PERSONNAGES ET LES ACTEURS
 -- ===============================================
-INSERT INTO character_actors (actor_id, character_id) VALUES
+INSERT INTO characters_actors (actor_id, character_id) VALUES
   ((SELECT actor_id FROM actors WHERE last_name_actor = 'DiCaprio'), (SELECT character_id FROM characters WHERE name_character = 'Dom Cobb')),
   ((SELECT actor_id FROM actors WHERE last_name_actor = 'Travolta'), (SELECT character_id FROM characters WHERE name_character = 'Vincent Vega')),
   ((SELECT actor_id FROM actors WHERE last_name_actor = 'Johansson'), (SELECT character_id FROM characters WHERE name_character = 'Charlotte')),
