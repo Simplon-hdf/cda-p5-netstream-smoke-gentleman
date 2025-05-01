@@ -64,9 +64,9 @@ WHERE first_name_actor = 'Andrew' and last_name_actor = 'Garfield';
 ```sql
 INSERT INTO movies (title, length, release_date, director_id)
  VALUES (
-   'Spider-Man: Homecoming',
+   'Spider-Man: Le retour de la mission',
    133,
-   '2017-07-07',
+   '2018-07-07',
    (SELECT director_id FROM directors WHERE last_name_director = 'Scott')
  )
  ON CONFLICT (title, length, release_date, director_id)
@@ -85,7 +85,7 @@ DO NOTHING;
 
 ```sql
 UPDATE movies
-  SET length = 175
+  SET length = 175,
   WHERE title = 'Inception' AND length = 148 AND release_date = '2010-07-16';
 ```
 
