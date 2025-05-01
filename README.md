@@ -32,9 +32,9 @@ ORDER BY release_date DESC;
 ### 👩‍🎤 Les noms, prénoms et âges des acteurs/actrices de plus de 30 ans dans l'ordre alphabétique
 
 ```sql
-SELECT first_name_actor, last_name_actor, EXTRACT(YEAR FROM AGE(CURRENT_DATE, date_of_birth)) AS age from actors
- WHERE EXTRACT(YEAR FROM AGE(CURRENT_DATE, date_of_birth)) > 30;
-
+SELECT last_name_actor, first_name_actor, EXTRACT(YEAR FROM AGE(CURRENT_DATE, date_of_birth)) AS age from actors
+ WHERE EXTRACT(YEAR FROM AGE(CURRENT_DATE, date_of_birth)) > 30
+    ORDER BY last_name_actor, first_name_actor;
 ```
 
 ### ⭐ La liste des acteurs/actrices principaux pour un film donné
