@@ -274,8 +274,8 @@ BEGIN
         gen_random_uuid(),
         NOW(),
         col.column_name,
-        old_row ->> col.column_name,
-        new_row ->> col.column_name,
+        COALESCE(old_row ->> col.column_name, 'NULL'),
+        COALESCE(new_row ->> col.column_name, 'NULL'),
         NEW.spectator_id
     FROM information_schema.columns col
     WHERE col.table_name = 'spectators'
@@ -292,6 +292,17 @@ CREATE TRIGGER track_spectator_updates
 AFTER UPDATE ON spectators
 FOR EACH ROW
 EXECUTE FUNCTION log_spectator_updates();
+
+
+-- Requête pour tester le triger
+
+UPDATE spectators
+SET
+    first_name_spectator = 'Gilbert',
+    last_name_spectator = 'Durand',
+    updated_at = NOW()
+WHERE
+    email = 'bob.johnson@example.com';
 
 ```
 

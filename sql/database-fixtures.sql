@@ -1,4 +1,9 @@
 -- ===============================================
+-- CREATION DE L'EXTENSION pgcrypto
+-- ===============================================
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+-- ===============================================
 -- INSERTION DES RÉALISATEURS
 -- ===============================================
 INSERT INTO directors (first_name_director, last_name_director) VALUES
@@ -162,7 +167,6 @@ INSERT INTO characters_actors (actor_id, character_id) VALUES
   ((SELECT actor_id FROM actors WHERE last_name_actor = 'Franco'), (SELECT character_id FROM characters WHERE name_character = 'Harry Osborn')),
   ((SELECT actor_id FROM actors WHERE last_name_actor = 'DeHaan'), (SELECT character_id FROM characters WHERE name_character = 'Harry Osborn'));
 
-
 -- ===============================================
 -- LIEN ENTRE LES FILMS ET LES PERSONNAGES
 -- ===============================================
@@ -230,21 +234,21 @@ INSERT INTO movies_actors (movie_id, actor_id) VALUES
 -- INSERTION DES SPECTATEURS
 -- ===============================================
 INSERT INTO spectators (first_name_spectator, last_name_spectator, email, password_hash) VALUES
-  ('Alice', 'Smith', 'alice.smith@example.com', 'hashed_password_1'),
-  ('Bob', 'Johnson', 'bob.johnson@example.com', 'hashed_password_2'),
-  ('Eve', 'Williams', 'eve.williams@example.com', 'hashed_password_3'),
-  ('Jean', 'Dupont', 'jean.dupont@example.com', 'hashed_password_4'),
-  ('Marie', 'Curie', 'marie.curie@example.com', 'hashed_password_5'),
-  ('Luc', 'Martin', 'luc.martin@example.com', 'hashed_password_6'),
-  ('Sophie', 'Durand', 'sophie.durand@example.com', 'hashed_password_7'),
-  ('Paul', 'Morel', 'paul.morel@example.com', 'hashed_password_8'),
-  ('Claire', 'Bernard', 'claire.bernard@example.com', 'hashed_password_9'),
-  ('Thomas', 'Lefebvre', 'thomas.lefebvre@example.com', 'hashed_password_10'),
-  ('Julie', 'Dubois', 'julie.dubois@example.com', 'hashed_password_11'),
-  ('François', 'Petit', 'francois.petit@example.com', 'hashed_password_12'),
-  ('Laura', 'Moreau', 'laura.moreau@example.com', 'hashed_password_13'),
-  ('Alexandre', 'Blanc', 'alexandre.blanc@example.com', 'hashed_password_14'),
-  ('Émilie', 'Roux', 'emilie.roux@example.com', 'hashed_password_15');
+  ('Alice', 'Smith', 'alice.smith@example.com', crypt('hashed_password_1', gen_salt('bf'))),
+  ('Bob', 'Johnson', 'bob.johnson@example.com', crypt('hashed_password_2', gen_salt('bf'))),
+  ('Eve', 'Williams', 'eve.williams@example.com', crypt('hashed_password_3', gen_salt('bf'))),
+  ('Jean', 'Dupont', 'jean.dupont@example.com', crypt('hashed_password_4', gen_salt('bf'))),
+  ('Marie', 'Curie', 'marie.curie@example.com', crypt('hashed_password_5', gen_salt('bf'))),
+  ('Luc', 'Martin', 'luc.martin@example.com', crypt('hashed_password_6', gen_salt('bf'))),
+  ('Sophie', 'Durand', 'sophie.durand@example.com', crypt('hashed_password_7', gen_salt('bf'))),
+  ('Paul', 'Morel', 'paul.morel@example.com', crypt('hashed_password_8', gen_salt('bf'))),
+  ('Claire', 'Bernard', 'claire.bernard@example.com', crypt('hashed_password_9', gen_salt('bf'))),
+  ('Thomas', 'Lefebvre', 'thomas.lefebvre@example.com', crypt('hashed_password_10', gen_salt('bf'))),
+  ('Julie', 'Dubois', 'julie.dubois@example.com', crypt('hashed_password_11', gen_salt('bf'))),
+  ('François', 'Petit', 'francois.petit@example.com',crypt( 'hashed_password_12', gen_salt('bf'))),
+  ('Laura', 'Moreau', 'laura.moreau@example.com', crypt('hashed_password_13', gen_salt('bf'))),
+  ('Alexandre', 'Blanc', 'alexandre.blanc@example.com', crypt('hashed_password_14', gen_salt('bf'))),
+  ('Émilie', 'Roux', 'emilie.roux@example.com', crypt('hashed_password_15', gen_salt('bf')));
 
 -- ===============================================
 -- LIEN ENTRE LES FILMS ET LES SPECTATEURS (FAVORIS)
