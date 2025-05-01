@@ -85,8 +85,7 @@ DO NOTHING;
 
 ```sql
 UPDATE movies
-  SET length = 175,
-  updated_at_movie = NOW()
+  SET length = 175
   WHERE title = 'Inception';
 ```
 
