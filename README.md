@@ -101,7 +101,7 @@ WHERE first_name_actor = 'Leonardo'
 
 ```sql
 SELECT * from actors
- ORDER BY created_at DESC
+ ORDER BY created_at_actor DESC
  LIMIT 3;
 ```
 ---
