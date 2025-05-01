@@ -19,6 +19,7 @@ Ce projet concerne la création de la base de données de **Netstream**, de sa c
 - [💾 Politique de sauvegarde](docs/save.md)
 - [🛠️ Les requêtes SQL](#requêtes-SQL)
 - [🚀 Les requêtes avancées](#requêtes-avancées)
+- [🔫 Le Trigger](#trigger)
 
 ---
 
@@ -262,10 +263,13 @@ CREATE OR REPLACE PROCEDURE delete_actor_from_movie(
 
  END;
  $$;
+```
 
+## 🔫 Trigger
 
--- Cette fonction permet de conserver un historique des modifications apportées aux utilisateurs
+Cette fonction permet de conserver un historique des modifications apportées aux utilisateurs
 
+```sql
 CREATE OR REPLACE FUNCTION log_spectator_updates()
 RETURNS TRIGGER AS $$
 DECLARE
@@ -287,10 +291,11 @@ BEGIN
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
+```
 
+Création du trigger qui s'active après chaque modification d'un spectateur
 
--- Création du trigger qui s'active après chaque modification d'un spectateur
-
+```sql
 CREATE TRIGGER track_spectator_updates
 AFTER UPDATE ON spectators
 FOR EACH ROW
