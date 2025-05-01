@@ -35,9 +35,9 @@ ORDER BY release_date DESC;
 ### 👩‍🎤 Les noms, prénoms et âges des acteurs/actrices de plus de 30 ans dans l'ordre alphabétique
 
 ```sql
-SELECT first_name_actor, last_name_actor, EXTRACT(YEAR FROM AGE(CURRENT_DATE, date_of_birth)) AS age from actors
- WHERE EXTRACT(YEAR FROM AGE(CURRENT_DATE, date_of_birth)) > 30;
-
+SELECT last_name_actor, first_name_actor, EXTRACT(YEAR FROM AGE(CURRENT_DATE, date_of_birth)) AS age from actors
+ WHERE EXTRACT(YEAR FROM AGE(CURRENT_DATE, date_of_birth)) > 30
+    ORDER BY last_name_actor, first_name_actor;
 ```
 
 ### ⭐ La liste des acteurs/actrices principaux pour un film donné
@@ -48,7 +48,7 @@ INNER JOIN movies_actors ON actors.actor_id = movies_actors.actor_id
     INNER JOIN movies ON movies.movie_id = movies_actors.movie_id
         INNER JOIN movies_characters ON movies.movie_id = movies_characters.movie_id
             INNER JOIN characters ON characters.character_id = movies_characters.character_id
-                INNER JOIN character_actors ON characters.character_id = character_actors.character_id AND character_actors.actor_id = actors.actor_id
+                INNER JOIN characters_actors ON characters.character_id = characters_actors.character_id AND characters_actors.actor_id = actors.actor_id
 WHERE movies.title = 'Psycho' AND movies_characters.character_type = 'principal';
 ```
 
@@ -67,9 +67,9 @@ WHERE first_name_actor = 'Andrew' and last_name_actor = 'Garfield';
 ```sql
 INSERT INTO movies (title, length, release_date, director_id)
  VALUES (
-   'Spider-Man: Homecoming',
+   'Spider-Man: Le retour de la mission',
    133,
-   '2017-07-07',
+   '2018-07-07',
    (SELECT director_id FROM directors WHERE last_name_director = 'Scott')
  )
  ON CONFLICT (title, length, release_date, director_id)
@@ -104,7 +104,7 @@ WHERE first_name_actor = 'Leonardo'
 
 ```sql
 SELECT * from actors
- ORDER BY created_at DESC
+ ORDER BY created_at_actor DESC
  LIMIT 3;
 ```
 ---
@@ -277,8 +277,8 @@ BEGIN
         gen_random_uuid(),
         NOW(),
         col.column_name,
-        old_row ->> col.column_name,
-        new_row ->> col.column_name,
+        COALESCE(old_row ->> col.column_name, 'NULL'),
+        COALESCE(new_row ->> col.column_name, 'NULL'),
         NEW.spectator_id
     FROM information_schema.columns col
     WHERE col.table_name = 'spectators'
@@ -295,6 +295,17 @@ CREATE TRIGGER track_spectator_updates
 AFTER UPDATE ON spectators
 FOR EACH ROW
 EXECUTE FUNCTION log_spectator_updates();
+
+
+-- Requête pour tester le triger
+
+UPDATE spectators
+SET
+    first_name_spectator = 'Gilbert',
+    last_name_spectator = 'Durand',
+    updated_at = NOW()
+WHERE
+    email = 'bob.johnson@example.com';
 
 ```
 
