@@ -86,7 +86,8 @@ DO NOTHING;
 ```sql
 UPDATE movies
   SET length = 175,
-  WHERE title = 'Inception' AND length = 148 AND release_date = '2010-07-16';
+  updated_at_movie = NOW()
+  WHERE title = 'Inception';
 ```
 
 ### ❌ Supprimer un acteur/actrice
