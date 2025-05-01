@@ -45,7 +45,7 @@ INNER JOIN movies_actors ON actors.actor_id = movies_actors.actor_id
     INNER JOIN movies ON movies.movie_id = movies_actors.movie_id
         INNER JOIN movies_characters ON movies.movie_id = movies_characters.movie_id
             INNER JOIN characters ON characters.character_id = movies_characters.character_id
-                INNER JOIN character_actors ON characters.character_id = character_actors.character_id AND character_actors.actor_id = actors.actor_id
+                INNER JOIN characters_actors ON characters.character_id = characters_actors.character_id AND characters_actors.actor_id = actors.actor_id
 WHERE movies.title = 'Psycho' AND movies_characters.character_type = 'principal';
 ```
 
