@@ -303,7 +303,7 @@ UPDATE spectators
 SET
     first_name_spectator = 'Gilbert',
     last_name_spectator = 'Durand',
-    updated_at = NOW()
+    updated_at_spectator = NOW()
 WHERE
     email = 'bob.johnson@example.com';
 
