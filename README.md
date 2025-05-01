@@ -125,7 +125,7 @@ CREATE OR REPLACE FUNCTION listFilmsRealisateur(
      RETURN QUERY
      SELECT m.title, m.release_date
      FROM movies m
-     INNER JOIN directors d ON m.director_id = d.director.id
+     INNER JOIN directors d ON m.director_id = d.director_id
      WHERE d.first_name_director = inputFirstName
         OR d.last_name_director = inputLastName;
  END;
