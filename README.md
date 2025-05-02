@@ -222,7 +222,7 @@ BEGIN
     SET first_name_actor = newFirstName,
         last_name_actor = newLastName,
         date_of_birth = newDOB,
-        updated_at = NOW()
+        updated_at_actor = NOW()
     WHERE actor_id = actorId;
 
     IF NOT FOUND THEN
